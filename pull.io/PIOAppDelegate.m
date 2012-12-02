@@ -6,11 +6,13 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
+#import "KFDataStore.h"
 #import "PIOAppDelegate.h"
 #import "PIOPutIOAPI2Client.h"
 
 @interface PIOAppDelegate ()
 
+@property (nonatomic, strong) KFDataStore *dataStore;
 @property (nonatomic, strong) PIOPutIOAPI2Client *putIOAPIClient;
 
 @end
@@ -21,6 +23,11 @@
     return (PIOAppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
++ (KFDataStore*)sharedDataStore {
+    KFDataStore *dataStore = [[self sharedAppDelegate] dataStore];
+    return dataStore;
+}
+
 + (PIOPutIOAPI2Client*)sharedPutIOAPIClient {
     PIOPutIOAPI2Client *client = [[self sharedAppDelegate] putIOAPIClient];
     return client;
@@ -28,6 +35,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setDataStore:[[KFDataStore alloc] init]];
     [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] init]];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

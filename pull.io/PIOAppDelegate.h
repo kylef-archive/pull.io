@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class KFDataStore;
 @class PIOPutIOAPI2Client;
 
 @interface PIOAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (KFDataStore*)sharedDataStore;
 + (PIOPutIOAPI2Client*)sharedPutIOAPIClient;
 
 @end

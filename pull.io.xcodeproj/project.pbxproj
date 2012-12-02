@@ -23,6 +23,7 @@
 		77A80B77166988C3003CD050 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77A80B75166988C3003CD050 /* InfoPlist.strings */; };
 		77A80B7A166988C3003CD050 /* pull_ioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A80B79166988C3003CD050 /* pull_ioTests.m */; };
 		77A80B9A166A2625003CD050 /* PIOPutIOAPI2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A80B99166A2625003CD050 /* PIOPutIOAPI2Client.m */; };
+		77A80BAC166C1D8E003CD050 /* PIOModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77A80BAA166C1D8E003CD050 /* PIOModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		77A80B79166988C3003CD050 /* pull_ioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pull_ioTests.m; sourceTree = "<group>"; };
 		77A80B98166A2625003CD050 /* PIOPutIOAPI2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOPutIOAPI2Client.h; path = API/put.io/PIOPutIOAPI2Client.h; sourceTree = "<group>"; };
 		77A80B99166A2625003CD050 /* PIOPutIOAPI2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOPutIOAPI2Client.m; path = API/put.io/PIOPutIOAPI2Client.m; sourceTree = "<group>"; };
+		77A80BAB166C1D8E003CD050 /* PIOModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PIOModel.xcdatamodel; sourceTree = "<group>"; };
 		A04DB9BE92E745B682DE0801 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 				77A80B5E166988C3003CD050 /* PIOAppDelegate.m */,
 				77A80B55166988C3003CD050 /* Supporting Files */,
 				77A80B9C166A2629003CD050 /* API */,
+				77A80BAD166C1D93003CD050 /* Data */,
 			);
 			path = pull.io;
 			sourceTree = "<group>";
@@ -177,6 +180,14 @@
 				77A80B99166A2625003CD050 /* PIOPutIOAPI2Client.m */,
 			);
 			name = put.io;
+			sourceTree = "<group>";
+		};
+		77A80BAD166C1D93003CD050 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				77A80BAA166C1D8E003CD050 /* PIOModel.xcdatamodeld */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +318,7 @@
 				77A80B5B166988C3003CD050 /* main.m in Sources */,
 				77A80B5F166988C3003CD050 /* PIOAppDelegate.m in Sources */,
 				77A80B9A166A2625003CD050 /* PIOPutIOAPI2Client.m in Sources */,
+				77A80BAC166C1D8E003CD050 /* PIOModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +501,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		77A80BAA166C1D8E003CD050 /* PIOModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				77A80BAB166C1D8E003CD050 /* PIOModel.xcdatamodel */,
+			);
+			currentVersion = 77A80BAB166C1D8E003CD050 /* PIOModel.xcdatamodel */;
+			name = PIOModel.xcdatamodeld;
+			path = Data/PIOModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 77A80B41166988C3003CD050 /* Project object */;
 }
