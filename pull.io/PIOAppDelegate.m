@@ -9,11 +9,13 @@
 #import "KFDataStore.h"
 #import "PIOAppDelegate.h"
 #import "PIOPutIOAPI2Client.h"
+#import "PIOTraktAPIClient.h"
 
 @interface PIOAppDelegate ()
 
 @property (nonatomic, strong) KFDataStore *dataStore;
 @property (nonatomic, strong) PIOPutIOAPI2Client *putIOAPIClient;
+@property (nonatomic, strong) PIOTraktAPIClient *traktAPIClient;
 
 @end
 
@@ -30,6 +32,11 @@
 
 + (PIOPutIOAPI2Client*)sharedPutIOAPIClient {
     PIOPutIOAPI2Client *client = [[self sharedAppDelegate] putIOAPIClient];
+    return client;
+}
+
++ (PIOTraktAPIClient*)sharedTraktAPIClient {
+    PIOTraktAPIClient *client = [[self sharedAppDelegate] traktAPIClient];
     return client;
 }
 

@@ -10,6 +10,7 @@
 
 @class KFDataStore;
 @class PIOPutIOAPI2Client;
+@class PIOTraktAPIClient;
 
 @interface PIOAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -17,5 +18,6 @@
 
 + (KFDataStore*)sharedDataStore;
 + (PIOPutIOAPI2Client*)sharedPutIOAPIClient;
++ (PIOTraktAPIClient*)sharedTraktAPIClient;
 
 @end
