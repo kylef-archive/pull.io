@@ -7,11 +7,29 @@
 //
 
 #import "PIOAppDelegate.h"
+#import "PIOPutIOAPI2Client.h"
+
+@interface PIOAppDelegate ()
+
+@property (nonatomic, strong) PIOPutIOAPI2Client *putIOAPIClient;
+
+@end
 
 @implementation PIOAppDelegate
 
++ (PIOAppDelegate*)sharedAppDelegate {
+    return (PIOAppDelegate*)[[UIApplication sharedApplication] delegate];
+}
+
++ (PIOPutIOAPI2Client*)sharedPutIOAPIClient {
+    PIOPutIOAPI2Client *client = [[self sharedAppDelegate] putIOAPIClient];
+    return client;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] init]];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
