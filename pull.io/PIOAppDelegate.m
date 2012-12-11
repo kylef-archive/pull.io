@@ -49,6 +49,13 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+#pragma message("forced login")
+        NSURL *URL = [[self putIOAPIClient] authenticationURL];
+        [[UIApplication sharedApplication] openURL:URL];
+    });
+
     return YES;
 }
 
@@ -77,6 +84,35 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    BOOL result = NO;
+
+    NSString *scheme = [url scheme];
+
+    if ([scheme isEqualToString:@"pullio"]) {
+        NSString *host = [url host];
+        if ([host isEqualToString:@"oauth-callback.put.io"]) {
+            NSString *path = [url path];
+            // We should really parse the code
+            NSString *code = [path substringFromIndex:7];
+
+            [[self putIOAPIClient] authenticateUsingCode:code success:^(AFOAuthCredential *credential) {
+                NSLog(@"Authentication success: %@", credential);
+            } failure:^(NSError *error) {
+                NSLog(@"Authentication failure: %@", error);
+            }];
+
+            result = YES;
+        }
+    }
+
+    return result;
 }
 
 @end

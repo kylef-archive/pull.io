@@ -7,22 +7,53 @@
 //
 
 #import "AFJSONRequestOperation.h"
+#import "AFOAuth2Client.h"
 
 #import "PIOPutIOAPI2Client.h"
 
 static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/";
+
+#define kPIOPutUIAPIOAuthIdentifier @"com.kylefuller.pullio.putio"
+
+#define kPIOPutIOAPIClientID @"233"
+#define kPIOPutIOAPIClientSecret @"j5s8tyj08zw4tlkkuxzh"
+#define kPIOPutIOAPIClientRedirectURI @"pullio://oauth-callback.put.io"
 
 @implementation PIOPutIOAPI2Client
 
 - (id)init {
     NSURL *baseURL = [NSURL URLWithString:kPIOPutIOAPI2APIBaseURLString];
 
-    if (self = [super initWithBaseURL:baseURL]) {
+    if (self = [super initWithBaseURL:baseURL clientID:kPIOPutIOAPIClientID secret:kPIOPutIOAPIClientSecret]) {
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
+
+//        AFOAuthCredential *credential = [self retrieveCredentialWithIdentifier:kPIOPutUIAPIOAuthIdentifier];
+//        if (credential) {
+//            [self setAuthorizationHeaderWithCredential:credential];
+//        }
     }
 
     return self;
+}
+
+- (NSURL*)authenticationURL {
+    NSString *authentication = [NSString stringWithFormat:@"oauth2/authenticate?client_id=%@&response_type=code&redirect_uri=%@", kPIOPutIOAPIClientID, kPIOPutIOAPIClientRedirectURI];
+    NSURL *URL = [NSURL URLWithString:authentication relativeToURL:[self baseURL]];
+
+    return [URL absoluteURL];
+}
+
+- (void)authenticateUsingCode:(NSString*)code
+                      success:(void (^)(AFOAuthCredential *credential))success
+                      failure:(void (^)(NSError *error))failure
+{
+    [self authenticateUsingOAuthWithPath:@"oauth2/access_token" code:code redirectURI:kPIOPutIOAPIClientRedirectURI success:^(AFOAuthCredential *credential) {
+//        [self storeCredential:credential withIdentifier:retrieveCredentialWithIdentifier:kPIOPutUIAPIOAuthIdentifier];
+        success(credential);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
 }
 
 @end

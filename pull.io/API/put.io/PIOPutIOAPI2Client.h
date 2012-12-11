@@ -7,7 +7,13 @@
 //
 
 #import "AFHTTPClient.h"
+#import "AFOAuth2Client.h"
 
-@interface PIOPutIOAPI2Client : AFHTTPClient
+@interface PIOPutIOAPI2Client : AFOAuth2Client
+
+- (NSURL*)authenticationURL;
+- (void)authenticateUsingCode:(NSString*)code
+                      success:(void (^)(AFOAuthCredential *credential))success
+                      failure:(void (^)(NSError *error))failure;
 
 @end
