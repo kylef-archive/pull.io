@@ -10,6 +10,10 @@
 
 @implementation PIOShowFilenameMatch
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"%@ S%@E%@", [self seriesName], [self seasonNumber], [self episodeNumbers]];
+}
+
 @end
 
 @implementation PIOShowFilenameMatcher

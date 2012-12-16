@@ -11,6 +11,8 @@
 #import "PIOPutIOAPI2Client.h"
 #import "PIOTraktAPIClient.h"
 
+#import "PIOMediaListViewController.h"
+
 @interface PIOAppDelegate ()
 
 @property (nonatomic, strong) KFDataStore *dataStore;
@@ -51,10 +53,16 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+
+    PIOMediaListViewController *viewController = [[PIOMediaListViewController alloc] initWithDataStore:[self dataStore]];
+    viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [[self window] setRootViewController:viewController];
+
     [self.window makeKeyAndVisible];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([[self putIOAPIClient] hasAuthorization]) {
+            [[self putIOAPIClient] getFiles];
         } else {
             NSURL *URL = [[self putIOAPIClient] authenticationURL];
             [[UIApplication sharedApplication] openURL:URL];
