@@ -83,7 +83,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
 #pragma mark -
 
 - (NSURL*)URLForFileID:(NSString*)fileID {
-    NSString *path = [NSString stringWithFormat:@"files/%@/download", fileID];
+    NSString *path = [NSString stringWithFormat:@"files/%@/stream", fileID];
     
     NSDictionary *parameters = @{
     @"oauth_token": [self accessToken],

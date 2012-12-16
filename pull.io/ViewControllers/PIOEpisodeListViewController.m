@@ -31,9 +31,9 @@
     [self setTitle:[show name]];
 
     NSFetchRequest *fetchRequest = [Episode fetchRequestInManagedObjectContext:[self managedObjectContext]];
-//
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@", show];
-//    [fetchRequest setPredicate:predicate];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@", show];
+    [fetchRequest setPredicate:predicate];
 
     [fetchRequest setSortDescriptors:@[
         [NSSortDescriptor sortDescriptorWithKey:@"season" ascending:YES],
@@ -41,7 +41,7 @@
     ]];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-    [self setFetchRequest:fetchRequest sectionNameKeyPath:@"season"];
+        [self setFetchRequest:fetchRequest sectionNameKeyPath:@"season"];
     });
 }
 
@@ -49,6 +49,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (NSString*)fetchedResultsTableController:(KFFetchedResultsTableController *)fetchedResultsTableController
@@ -65,7 +69,9 @@
 {
     NSString *title = [episode name];
 
-    if (title == nil) {
+    if (title) {
+        title = [NSString stringWithFormat:@"%@ %@", [episode episode], title];
+    } else {
         title = [NSString stringWithFormat:@"Episode %@", [episode episode]];
     }
 
@@ -85,23 +91,40 @@
     File *file = [episode file];
 
     NSURL *URL = [file URL];
-    MPMoviePlayerController *playerController = [[MPMoviePlayerController alloc] initWithContentURL:URL];
-    [self.view addSubview:playerController.view];
-    [playerController setFullscreen:YES animated:YES];
-    [playerController play];
-    [playerController setControlStyle:MPMovieControlStyleFullscreen];
-    [playerController play];
 
-//    [[PIOAppDelegate sharedPutIOAPIClient] getURLForID:fileid success:^(NSURL *URL) {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            MPMoviePlayerController *playerController = [[MPMoviePlayerController alloc] initWithContentURL:URL];
-//            [self.view addSubview:playerController.view];
-//            playerController.fullscreen = YES;
-//            [playerController play];
-//        });
-//    } failure:^(NSError *error) {
-//        NSLog(@"fail to get URL %@", error);
-//    }];
+    MPMoviePlayerController *playerController = [[MPMoviePlayerController alloc] initWithContentURL:URL];
+    [[self view] addSubview:[playerController view]];
+    [playerController setFullscreen:YES];
+    [playerController setMovieSourceType:MPMovieSourceTypeStreaming];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayerWillExitFullscreen:)
+                                                 name:MPMoviePlayerWillExitFullscreenNotification
+                                               object:playerController];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayerFinished:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:playerController];
+
+    [playerController prepareToPlay];
+    [playerController play];
+}
+
+- (void)moviePlayerWillExitFullscreen:(NSNotification*)notification {
+    MPMoviePlayerController *player = [notification object];
+
+    [player stop];
+    [[player view] removeFromSuperview];
+
+    // Update "watched"
+}
+
+- (void)moviePlayerFinished:(NSNotification*)notification{
+    MPMoviePlayerController *player = [notification object];
+
+    [player stop];
+    [[player view] removeFromSuperview];
 }
 
 @end
