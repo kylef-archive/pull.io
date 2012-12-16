@@ -81,7 +81,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
         [self getFiles];
 
 #if TESTFLIGHT
-        [TestFlight checkpoint:@"Authenticated"];
+        [TestFlight passCheckpoint:@"Authenticated"];
 #endif
     } failure:^(NSError *error) {
         failure(error);
