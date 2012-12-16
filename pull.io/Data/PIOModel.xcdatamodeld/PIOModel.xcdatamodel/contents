@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="PIOModel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Episode" representedClassName="Episode" syncable="YES">
+        <attribute name="episode" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="season" attributeType="String" syncable="YES"/>
+        <attribute name="watched" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <relationship name="file" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="File" inverseName="episode" inverseEntity="File" syncable="YES"/>
+        <relationship name="show" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="episodes" inverseEntity="Show" syncable="YES"/>
+    </entity>
+    <entity name="File" representedClassName="File" syncable="YES">
+        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="episode" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Episode" inverseName="file" inverseEntity="Episode" syncable="YES"/>
+        <relationship name="movie" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Movie" inverseName="file" inverseEntity="Movie" syncable="YES"/>
+    </entity>
+    <entity name="Movie" representedClassName="Movie" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="file" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="File" inverseName="movie" inverseEntity="File" syncable="YES"/>
+    </entity>
+    <entity name="PutIOFile" representedClassName="PutIOFile" parentEntity="File" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="Show" representedClassName="Show" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Episode" inverseName="show" inverseEntity="Episode" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Episode" positionX="196" positionY="387" width="128" height="135"/>
+        <element name="File" positionX="-27" positionY="207" width="128" height="88"/>
+        <element name="Movie" positionX="286" positionY="180" width="128" height="75"/>
+        <element name="PutIOFile" positionX="-63" positionY="335" width="128" height="58"/>
+        <element name="Show" positionX="-9" positionY="450" width="128" height="75"/>
+    </elements>
 </model>
