@@ -15,4 +15,8 @@
 @dynamic movie;
 @dynamic episode;
 
+- (NSURL*)URL {
+    return nil;
+}
+
 @end

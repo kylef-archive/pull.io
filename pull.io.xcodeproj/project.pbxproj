@@ -16,6 +16,11 @@
 		770F49A2167D4A41008CADCD /* PIOShowFilenameMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */; };
 		770F49A5167D52BA008CADCD /* PIOShowFilenameMatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A4167D52BA008CADCD /* PIOShowFilenameMatcherTests.m */; };
 		770F49A6167D5435008CADCD /* PIOShowFilenameMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */; };
+		771CF181167DDA9800AF348C /* Show+PIOExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF180167DDA9800AF348C /* Show+PIOExtension.m */; };
+		771CF184167DDBA900AF348C /* Episode+PIOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF183167DDBA900AF348C /* Episode+PIOExtensions.m */; };
+		771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */; };
+		771CF189167DE19300AF348C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771CF188167DE19300AF348C /* MediaPlayer.framework */; };
+		7795B406167DD82300AFF76C /* PIOMediaListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795B405167DD82300AFF76C /* PIOMediaListViewController.m */; };
 		77A80B4F166988C3003CD050 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B4E166988C3003CD050 /* UIKit.framework */; };
 		77A80B51166988C3003CD050 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B50166988C3003CD050 /* Foundation.framework */; };
 		77A80B53166988C3003CD050 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B52166988C3003CD050 /* CoreGraphics.framework */; };
@@ -61,6 +66,15 @@
 		770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOShowFilenameMatcher.m; sourceTree = "<group>"; };
 		770F49A3167D52BA008CADCD /* PIOShowFilenameMatcherTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOShowFilenameMatcherTests.h; sourceTree = "<group>"; };
 		770F49A4167D52BA008CADCD /* PIOShowFilenameMatcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOShowFilenameMatcherTests.m; sourceTree = "<group>"; };
+		771CF17F167DDA9800AF348C /* Show+PIOExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Show+PIOExtension.h"; path = "Data/NSManagedObjectExtensions/Show+PIOExtension.h"; sourceTree = "<group>"; };
+		771CF180167DDA9800AF348C /* Show+PIOExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Show+PIOExtension.m"; path = "Data/NSManagedObjectExtensions/Show+PIOExtension.m"; sourceTree = "<group>"; };
+		771CF182167DDBA900AF348C /* Episode+PIOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Episode+PIOExtensions.h"; path = "Data/NSManagedObjectExtensions/Episode+PIOExtensions.h"; sourceTree = "<group>"; };
+		771CF183167DDBA900AF348C /* Episode+PIOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Episode+PIOExtensions.m"; path = "Data/NSManagedObjectExtensions/Episode+PIOExtensions.m"; sourceTree = "<group>"; };
+		771CF185167DDE0300AF348C /* PIOEpisodeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOEpisodeListViewController.h; path = ViewControllers/PIOEpisodeListViewController.h; sourceTree = "<group>"; };
+		771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOEpisodeListViewController.m; path = ViewControllers/PIOEpisodeListViewController.m; sourceTree = "<group>"; };
+		771CF188167DE19300AF348C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		7795B404167DD82300AFF76C /* PIOMediaListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOMediaListViewController.h; path = ViewControllers/PIOMediaListViewController.h; sourceTree = "<group>"; };
+		7795B405167DD82300AFF76C /* PIOMediaListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOMediaListViewController.m; path = ViewControllers/PIOMediaListViewController.m; sourceTree = "<group>"; };
 		77A80B4A166988C3003CD050 /* pull.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pull.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A80B4E166988C3003CD050 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		77A80B50166988C3003CD050 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +110,7 @@
 				77A80B4F166988C3003CD050 /* UIKit.framework in Frameworks */,
 				77A80B51166988C3003CD050 /* Foundation.framework in Frameworks */,
 				77A80B53166988C3003CD050 /* CoreGraphics.framework in Frameworks */,
+				771CF189167DE19300AF348C /* MediaPlayer.framework in Frameworks */,
 				71A9872C9AE040CA8F744608 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,9 +145,32 @@
 			name = NSManagedObject;
 			sourceTree = "<group>";
 		};
+		771CF17D167DDA7100AF348C /* NSManagedObjectExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				771CF17F167DDA9800AF348C /* Show+PIOExtension.h */,
+				771CF180167DDA9800AF348C /* Show+PIOExtension.m */,
+				771CF182167DDBA900AF348C /* Episode+PIOExtensions.h */,
+				771CF183167DDBA900AF348C /* Episode+PIOExtensions.m */,
+			);
+			name = NSManagedObjectExtensions;
+			sourceTree = "<group>";
+		};
+		7795B408167DD82800AFF76C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7795B404167DD82300AFF76C /* PIOMediaListViewController.h */,
+				7795B405167DD82300AFF76C /* PIOMediaListViewController.m */,
+				771CF185167DDE0300AF348C /* PIOEpisodeListViewController.h */,
+				771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		77A80B3F166988C3003CD050 = {
 			isa = PBXGroup;
 			children = (
+				771CF188167DE19300AF348C /* MediaPlayer.framework */,
 				77A80B54166988C3003CD050 /* pull.io */,
 				77A80B72166988C3003CD050 /* pull.ioTests */,
 				77A80B4D166988C3003CD050 /* Frameworks */,
@@ -167,6 +205,7 @@
 			children = (
 				77A80B5D166988C3003CD050 /* PIOAppDelegate.h */,
 				77A80B5E166988C3003CD050 /* PIOAppDelegate.m */,
+				7795B408167DD82800AFF76C /* ViewControllers */,
 				77A80B55166988C3003CD050 /* Supporting Files */,
 				77A80B9C166A2629003CD050 /* API */,
 				77A80BAD166C1D93003CD050 /* Data */,
@@ -234,6 +273,7 @@
 			children = (
 				77A80BAA166C1D8E003CD050 /* PIOModel.xcdatamodeld */,
 				770F499F167D45FF008CADCD /* NSManagedObject */,
+				771CF17D167DDA7100AF348C /* NSManagedObjectExtensions */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -383,6 +423,10 @@
 				770F499B167D45FA008CADCD /* Show.m in Sources */,
 				770F499E167D45FA008CADCD /* PutIOFile.m in Sources */,
 				770F49A2167D4A41008CADCD /* PIOShowFilenameMatcher.m in Sources */,
+				7795B406167DD82300AFF76C /* PIOMediaListViewController.m in Sources */,
+				771CF181167DDA9800AF348C /* Show+PIOExtension.m in Sources */,
+				771CF184167DDBA900AF348C /* Episode+PIOExtensions.m in Sources */,
+				771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

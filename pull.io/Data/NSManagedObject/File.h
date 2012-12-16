@@ -16,4 +16,6 @@
 @property (nonatomic, retain) NSManagedObject *movie;
 @property (nonatomic, retain) NSManagedObject *episode;
 
+- (NSURL*)URL;
+
 @end

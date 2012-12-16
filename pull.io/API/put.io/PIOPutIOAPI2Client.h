@@ -21,4 +21,10 @@
                       success:(void (^)(AFOAuthCredential *credential))success
                       failure:(void (^)(NSError *error))failure;
 
+#pragma mark -
+
+- (NSURL*)URLForFileID:(NSString*)fileID;
+
+- (void)getFiles;
+
 @end

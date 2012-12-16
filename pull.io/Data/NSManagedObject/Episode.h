@@ -14,8 +14,8 @@
 @interface Episode : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * episode;
-@property (nonatomic, retain) NSNumber * name;
-@property (nonatomic, retain) NSString * season;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * season;
 @property (nonatomic, retain) NSNumber * watched;
 @property (nonatomic, retain) File *file;
 @property (nonatomic, retain) NSManagedObject *show;
