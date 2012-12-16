@@ -19,6 +19,10 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
 #define kPIOPutIOAPIClientSecret @"j5s8tyj08zw4tlkkuxzh"
 #define kPIOPutIOAPIClientRedirectURI @"pullio://oauth-callback.put.io"
 
+@interface PIOPutIOAPI2Client ()
+@property (nonatomic, strong) NSString *accessToken;
+@end
+
 @implementation PIOPutIOAPI2Client
 
 - (id)init {
@@ -28,10 +32,11 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
 
-//        AFOAuthCredential *credential = [self retrieveCredentialWithIdentifier:kPIOPutUIAPIOAuthIdentifier];
-//        if (credential) {
+        AFOAuthCredential *credential = [AFOAuthCredential retrieveCredentialWithIdentifier:kPIOPutUIAPIOAuthIdentifier];
+        if (credential) {
+            [self setAccessToken:[credential accessToken]];
 //            [self setAuthorizationHeaderWithCredential:credential];
-//        }
+        }
     }
 
     return self;
@@ -44,12 +49,18 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
     return [URL absoluteURL];
 }
 
+- (BOOL)hasAuthorization {
+    return [self accessToken] != nil;
+    return ([self defaultValueForHeader:@"Authorization"] != nil);
+}
+
 - (void)authenticateUsingCode:(NSString*)code
                       success:(void (^)(AFOAuthCredential *credential))success
                       failure:(void (^)(NSError *error))failure
 {
     [self authenticateUsingOAuthWithPath:@"oauth2/access_token" code:code redirectURI:kPIOPutIOAPIClientRedirectURI success:^(AFOAuthCredential *credential) {
-//        [self storeCredential:credential withIdentifier:retrieveCredentialWithIdentifier:kPIOPutUIAPIOAuthIdentifier];
+        [AFOAuthCredential storeCredential:credential withIdentifier:kPIOPutUIAPIOAuthIdentifier];
+        [self setAccessToken:[credential accessToken]];
         success(credential);
     } failure:^(NSError *error) {
         failure(error);

@@ -12,6 +12,7 @@
 @interface PIOPutIOAPI2Client : AFOAuth2Client
 
 - (NSURL*)authenticationURL;
+- (BOOL)hasAuthorization;
 - (void)authenticateUsingCode:(NSString*)code
                       success:(void (^)(AFOAuthCredential *credential))success
                       failure:(void (^)(NSError *error))failure;

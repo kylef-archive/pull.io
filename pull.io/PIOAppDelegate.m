@@ -51,9 +51,11 @@
     [self.window makeKeyAndVisible];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-#pragma message("forced login")
-        NSURL *URL = [[self putIOAPIClient] authenticationURL];
-        [[UIApplication sharedApplication] openURL:URL];
+        if ([[self putIOAPIClient] hasAuthorization]) {
+        } else {
+            NSURL *URL = [[self putIOAPIClient] authenticationURL];
+            [[UIApplication sharedApplication] openURL:URL];
+        }
     });
 
     return YES;
