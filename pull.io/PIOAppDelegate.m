@@ -13,6 +13,10 @@
 
 #import "PIOMediaListViewController.h"
 
+#ifdef TESTFLIGHT
+#import "TestFlight.h"
+#endif
+
 @interface PIOAppDelegate ()
 
 @property (nonatomic, strong) KFDataStore *dataStore;
@@ -68,6 +72,11 @@
             [[UIApplication sharedApplication] openURL:URL];
         }
     });
+
+#ifdef TESTFLIGHT
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    [TestFlight takeOff:@"90318dae391050c32c29073903490170_OTg2OTEyMDEyLTA2LTEwIDE0OjI1OjU1LjYyNzM2Ng"];
+#endif
 
     return YES;
 }

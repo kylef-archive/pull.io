@@ -18,6 +18,10 @@
 #import "Episode+PIOExtensions.h"
 #import "PIOShowFilenameMatcher.h"
 
+#ifdef TESTFLIGHT
+#import "TestFlight.h"
+#endif
+
 static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/";
 
 #define kPIOPutUIAPIOAuthIdentifier @"com.kylefuller.pullio.putio"
@@ -75,8 +79,16 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
 
 #pragma mark - Mis placed API call
         [self getFiles];
+
+#if TESTFLIGHT
+        [TestFlight checkpoint:@"Authenticated"];
+#endif
     } failure:^(NSError *error) {
         failure(error);
+        
+#if TESTFLIGHT
+        TFLog(@"Authentication error: %@", error);
+#endif
     }];
 }
 
@@ -143,6 +155,10 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
                         [managedFile setEpisode:episode];
 
                         [managedObjectContext save];
+                        
+#if TESTFLIGHT
+                        TFLog(@"TV Show match %@ // %@", [managedFile filename], match);
+#endif
                     }
                 }
             }
