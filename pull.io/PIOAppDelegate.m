@@ -42,8 +42,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self setDataStore:[[KFDataStore alloc] init]];
-    [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] init]];
+    KFDataStore *dataStore = [KFDataStore standardLocalDataStore];
+    [self setDataStore:dataStore];
+
+    NSManagedObjectContext *managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] initWithManagedObjectContext:managedObjectContext]];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

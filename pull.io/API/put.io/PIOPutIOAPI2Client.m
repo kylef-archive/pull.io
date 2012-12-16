@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
+#import "NSManagedObjectContext+KFData.h"
+#import "NSManagedObject+KFData.h"
 #import "AFJSONRequestOperation.h"
 #import "AFOAuth2Client.h"
 
@@ -21,14 +23,17 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
 
 @interface PIOPutIOAPI2Client ()
 @property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation PIOPutIOAPI2Client
 
-- (id)init {
+- (id)initWithManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
     NSURL *baseURL = [NSURL URLWithString:kPIOPutIOAPI2APIBaseURLString];
 
     if (self = [super initWithBaseURL:baseURL clientID:kPIOPutIOAPIClientID secret:kPIOPutIOAPIClientSecret]) {
+        _managedObjectContext = managedObjectContext;
+
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
 

@@ -9,7 +9,11 @@
 #import "AFHTTPClient.h"
 #import "AFOAuth2Client.h"
 
+@class NSManagedObjectContext;
+
 @interface PIOPutIOAPI2Client : AFOAuth2Client
+
+- (id)initWithManagedObjectContext:(NSManagedObjectContext*)managedObjectContext;
 
 - (NSURL*)authenticationURL;
 - (BOOL)hasAuthorization;
