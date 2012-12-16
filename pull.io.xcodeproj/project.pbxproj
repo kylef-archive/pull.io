@@ -170,7 +170,6 @@
 		77A80B3F166988C3003CD050 = {
 			isa = PBXGroup;
 			children = (
-				771CF188167DE19300AF348C /* MediaPlayer.framework */,
 				77A80B54166988C3003CD050 /* pull.io */,
 				77A80B72166988C3003CD050 /* pull.ioTests */,
 				77A80B4D166988C3003CD050 /* Frameworks */,
@@ -191,6 +190,7 @@
 		77A80B4D166988C3003CD050 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				771CF188167DE19300AF348C /* MediaPlayer.framework */,
 				77A80B4E166988C3003CD050 /* UIKit.framework */,
 				77A80B50166988C3003CD050 /* Foundation.framework */,
 				77A80B52166988C3003CD050 /* CoreGraphics.framework */,
@@ -296,6 +296,7 @@
 			buildPhases = (
 				77A80B46166988C3003CD050 /* Sources */,
 				77A80B47166988C3003CD050 /* Frameworks */,
+				7703CDC6167E04040089EA1B /* ShellScript */,
 				77A80B48166988C3003CD050 /* Resources */,
 				EC0E85A0A46444D7921C80FF /* Copy Pods Resources */,
 			);
@@ -378,6 +379,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7703CDC6167E04040089EA1B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GIT_RELEASE_VERSION=$(git describe --tags --dirty --always)\nCOMMITS=$(git rev-list HEAD | wc -l)\nCOMMITS=$(($COMMITS))\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleShortVersionString\" \"${GIT_RELEASE_VERSION#*v}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"";
+		};
 		77A80B69166988C3003CD050 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
