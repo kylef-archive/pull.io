@@ -109,39 +109,8 @@
 
     NSURL *URL = [file URL];
 
-    MPMoviePlayerController *playerController = [[MPMoviePlayerController alloc] initWithContentURL:URL];
-    [[self view] addSubview:[playerController view]];
-    [playerController setFullscreen:YES];
-    [playerController setMovieSourceType:MPMovieSourceTypeStreaming];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayerWillExitFullscreen:)
-                                                 name:MPMoviePlayerWillExitFullscreenNotification
-                                               object:playerController];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlayerFinished:)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:playerController];
-
-    [playerController prepareToPlay];
-    [playerController play];
-}
-
-- (void)moviePlayerWillExitFullscreen:(NSNotification*)notification {
-    MPMoviePlayerController *player = [notification object];
-
-    [player stop];
-    [[player view] removeFromSuperview];
-
-    // Update "watched"
-}
-
-- (void)moviePlayerFinished:(NSNotification*)notification{
-    MPMoviePlayerController *player = [notification object];
-
-    [player stop];
-    [[player view] removeFromSuperview];
+    MPMoviePlayerViewController *playerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:URL];
+    [self presentMoviePlayerViewControllerAnimated:playerViewController];
 }
 
 @end
