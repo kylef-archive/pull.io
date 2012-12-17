@@ -28,7 +28,24 @@
 - (void)setShow:(NSManagedObjectID*)showID {
     Show *show = (Show*)[[self managedObjectContext] objectWithID:showID];
 
-    [self setTitle:[show name]];
+    [[self managedObjectContext] performBlock:^{
+        NSString *title = [show name];
+        NSString *overview = [show overview];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setTitle:title];
+
+            UIFont *font = [UIFont systemFontOfSize:16];
+            CGSize size = [[self tableView] frame].size;
+            size = [overview sizeWithFont:font constrainedToSize:CGSizeMake(size.width, MAXFLOAT)];
+            
+            UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+            [headerView setFont:font];
+            [headerView setNumberOfLines:0];
+            [headerView setText:overview];
+            [[self tableView] setTableHeaderView:headerView];
+        });
+    }];
 
     NSFetchRequest *fetchRequest = [Episode fetchRequestInManagedObjectContext:[self managedObjectContext]];
 
