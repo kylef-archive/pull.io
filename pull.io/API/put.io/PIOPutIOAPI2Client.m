@@ -16,7 +16,6 @@
 #import "PutIOFile.h"
 #import "Show+PIOExtension.h"
 #import "Episode+PIOExtensions.h"
-#import "PIOShowFilenameMatcher.h"
 
 #ifdef TESTFLIGHT
 #import "TestFlight.h"
@@ -120,8 +119,6 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
         NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
 
         [managedObjectContext performWriteBlock:^{
-            PIOShowFilenameMatcher *filenameMatcher = [[PIOShowFilenameMatcher alloc] init];
-
             NSArray *files = [responseObject objectForKey:@"files"];
             for (NSDictionary *file in files) {
                 NSString *contentType = [file objectForKey:@"content_type"];
@@ -140,26 +137,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
                         [managedFile setFilename:filename];
                     }
 
-                    // TODO: Move this out of the API, it should be generic with other "providers"
-                    if ([managedFile episode] == nil) {
-                        PIOShowFilenameMatch *match = [filenameMatcher matchFilename:[managedFile filename]];
-                        NSLog(@"Match: %@", match);
-
-                        Show *show = [Show findOrCreate:[match seriesName]
-                                 inManagedObjectContext:managedObjectContext];
-                        Episode *episode = [Episode findOrShow:show
-                                                        Season:[match seasonNumber]
-                                                       Episode:[[match episodeNumbers] lastObject]
-                                        inManagedObjectContext:managedObjectContext];
-                        
-                        [managedFile setEpisode:episode];
-
-                        [managedObjectContext save];
-                        
-#if TESTFLIGHT
-                        TFLog(@"TV Show match %@ // %@", [managedFile filename], match);
-#endif
-                    }
+                    NSLog(@"Adding file %@", filename);
                 }
             }
         }];

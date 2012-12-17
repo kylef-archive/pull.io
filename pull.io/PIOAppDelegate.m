@@ -17,11 +17,15 @@
 #import "TestFlight.h"
 #endif
 
+#import "PIOFileManager.h"
+
 @interface PIOAppDelegate ()
 
 @property (nonatomic, strong) KFDataStore *dataStore;
 @property (nonatomic, strong) PIOPutIOAPI2Client *putIOAPIClient;
 @property (nonatomic, strong) PIOTraktAPIClient *traktAPIClient;
+
+@property (nonatomic, strong) PIOFileManager *fileManager;
 
 @end
 
@@ -53,6 +57,10 @@
 
     NSManagedObjectContext *managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] initWithManagedObjectContext:managedObjectContext]];
+
+    managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    PIOFileManager *fileManager = [[PIOFileManager alloc] initWithManagedObjectContext:managedObjectContext];
+    [self setFileManager:fileManager];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

@@ -21,6 +21,7 @@
 		771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */; };
 		771CF189167DE19300AF348C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771CF188167DE19300AF348C /* MediaPlayer.framework */; };
 		7795B406167DD82300AFF76C /* PIOMediaListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795B405167DD82300AFF76C /* PIOMediaListViewController.m */; };
+		77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73EC3167FA72E00FA7680 /* PIOFileManager.m */; };
 		77A80B4F166988C3003CD050 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B4E166988C3003CD050 /* UIKit.framework */; };
 		77A80B51166988C3003CD050 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B50166988C3003CD050 /* Foundation.framework */; };
 		77A80B53166988C3003CD050 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B52166988C3003CD050 /* CoreGraphics.framework */; };
@@ -75,6 +76,8 @@
 		771CF188167DE19300AF348C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		7795B404167DD82300AFF76C /* PIOMediaListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOMediaListViewController.h; path = ViewControllers/PIOMediaListViewController.h; sourceTree = "<group>"; };
 		7795B405167DD82300AFF76C /* PIOMediaListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOMediaListViewController.m; path = ViewControllers/PIOMediaListViewController.m; sourceTree = "<group>"; };
+		77A73EC2167FA72E00FA7680 /* PIOFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOFileManager.h; sourceTree = "<group>"; };
+		77A73EC3167FA72E00FA7680 /* PIOFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOFileManager.m; sourceTree = "<group>"; };
 		77A80B4A166988C3003CD050 /* pull.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pull.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A80B4E166988C3003CD050 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		77A80B50166988C3003CD050 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -211,6 +214,8 @@
 				77A80BAD166C1D93003CD050 /* Data */,
 				770F49A0167D4A41008CADCD /* PIOShowFilenameMatcher.h */,
 				770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */,
+				77A73EC2167FA72E00FA7680 /* PIOFileManager.h */,
+				77A73EC3167FA72E00FA7680 /* PIOFileManager.m */,
 			);
 			path = pull.io;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 				771CF181167DDA9800AF348C /* Show+PIOExtension.m in Sources */,
 				771CF184167DDBA900AF348C /* Episode+PIOExtensions.m in Sources */,
 				771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */,
+				77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
