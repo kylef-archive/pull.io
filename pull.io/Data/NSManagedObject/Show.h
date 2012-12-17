@@ -2,7 +2,7 @@
 //  Show.h
 //  pull.io
 //
-//  Created by Kyle Fuller on 15/12/2012.
+//  Created by Kyle Fuller on 17/12/2012.
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
@@ -14,6 +14,8 @@
 @interface Show : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * tvdb_id;
+@property (nonatomic, retain) NSString * overview;
 @property (nonatomic, retain) NSSet *episodes;
 @end
 

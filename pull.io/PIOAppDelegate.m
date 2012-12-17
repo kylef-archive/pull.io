@@ -10,6 +10,7 @@
 #import "PIOAppDelegate.h"
 #import "PIOPutIOAPI2Client.h"
 #import "PIOTraktAPIClient.h"
+#import "PIOTheTVDBAPIClient.h"
 
 #import "PIOMediaListViewController.h"
 
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) PIOPutIOAPI2Client *putIOAPIClient;
 @property (nonatomic, strong) PIOTraktAPIClient *traktAPIClient;
 
+@property (nonatomic, strong) PIOTheTVDBAPIClient *tvdbAPIClient;
 @property (nonatomic, strong) PIOFileManager *fileManager;
 
 @end
@@ -58,15 +60,21 @@
     NSManagedObjectContext *managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] initWithManagedObjectContext:managedObjectContext]];
 
-    managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    PIOFileManager *fileManager = [[PIOFileManager alloc] initWithManagedObjectContext:managedObjectContext];
-    [self setFileManager:fileManager];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSManagedObjectContext *managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        PIOFileManager *fileManager = [[PIOFileManager alloc] initWithManagedObjectContext:managedObjectContext];
+        [self setFileManager:fileManager];
+
+        managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        PIOTheTVDBAPIClient *apiClient = [[PIOTheTVDBAPIClient alloc] initWithManagedObjectContext:managedObjectContext];
+        [self setTvdbAPIClient:apiClient];
+    });
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
-    PIOMediaListViewController *viewController = [[PIOMediaListViewController alloc] initWithDataStore:[self dataStore]];
+    UIViewController *viewController = [[PIOMediaListViewController alloc] initWithDataStore:[self dataStore]];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [[self window] setRootViewController:viewController];
 
