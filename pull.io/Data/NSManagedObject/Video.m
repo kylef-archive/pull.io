@@ -1,18 +1,16 @@
 //
-//  Movie.m
+//  Video.m
 //  pull.io
 //
 //  Created by Kyle Fuller on 18/12/2012.
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import "Movie.h"
-#import "File.h"
+#import "Video.h"
 
 
-@implementation Movie
+@implementation Video
 
-@dynamic title;
-@dynamic file;
+@dynamic watched;
 
 @end

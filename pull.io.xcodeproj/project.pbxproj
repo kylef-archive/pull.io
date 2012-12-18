@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		71A9872C9AE040CA8F744608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32D63AAAE4BFC886211ED /* libPods.a */; };
 		770F4992167D45FA008CADCD /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F4991167D45FA008CADCD /* File.m */; };
-		770F4995167D45FA008CADCD /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F4994167D45FA008CADCD /* Episode.m */; };
-		770F4998167D45FA008CADCD /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F4997167D45FA008CADCD /* Movie.m */; };
 		770F499E167D45FA008CADCD /* PutIOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F499D167D45FA008CADCD /* PutIOFile.m */; };
 		770F49A2167D4A41008CADCD /* PIOShowFilenameMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */; };
 		770F49A5167D52BA008CADCD /* PIOShowFilenameMatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A4167D52BA008CADCD /* PIOShowFilenameMatcherTests.m */; };
@@ -20,6 +18,9 @@
 		771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */; };
 		771CF189167DE19300AF348C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771CF188167DE19300AF348C /* MediaPlayer.framework */; };
 		7795B406167DD82300AFF76C /* PIOMediaListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795B405167DD82300AFF76C /* PIOMediaListViewController.m */; };
+		779AE8AA1680D94200E2D887 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 779AE8A91680D94200E2D887 /* Movie.m */; };
+		779AE8AD1680D94200E2D887 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 779AE8AC1680D94200E2D887 /* Episode.m */; };
+		779AE8B01680D94200E2D887 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 779AE8AF1680D94200E2D887 /* Video.m */; };
 		77A73EB1167E3A4800FA7680 /* PIOTheTVDBAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73EB0167E3A4800FA7680 /* PIOTheTVDBAPIClient.m */; };
 		77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73EC3167FA72E00FA7680 /* PIOFileManager.m */; };
 		77A73ECB167FB8FF00FA7680 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73ECA167FB8FF00FA7680 /* Show.m */; };
@@ -56,10 +57,6 @@
 		5BA32D63AAAE4BFC886211ED /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		770F4990167D45FA008CADCD /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Data/NSManagedObject/File.h; sourceTree = "<group>"; };
 		770F4991167D45FA008CADCD /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Data/NSManagedObject/File.m; sourceTree = "<group>"; };
-		770F4993167D45FA008CADCD /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Episode.h; path = Data/NSManagedObject/Episode.h; sourceTree = "<group>"; };
-		770F4994167D45FA008CADCD /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Episode.m; path = Data/NSManagedObject/Episode.m; sourceTree = "<group>"; };
-		770F4996167D45FA008CADCD /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Movie.h; path = Data/NSManagedObject/Movie.h; sourceTree = "<group>"; };
-		770F4997167D45FA008CADCD /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Movie.m; path = Data/NSManagedObject/Movie.m; sourceTree = "<group>"; };
 		770F499C167D45FA008CADCD /* PutIOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutIOFile.h; path = Data/NSManagedObject/PutIOFile.h; sourceTree = "<group>"; };
 		770F499D167D45FA008CADCD /* PutIOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutIOFile.m; path = Data/NSManagedObject/PutIOFile.m; sourceTree = "<group>"; };
 		770F49A0167D4A41008CADCD /* PIOShowFilenameMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOShowFilenameMatcher.h; sourceTree = "<group>"; };
@@ -75,6 +72,12 @@
 		771CF188167DE19300AF348C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		7795B404167DD82300AFF76C /* PIOMediaListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOMediaListViewController.h; path = ViewControllers/PIOMediaListViewController.h; sourceTree = "<group>"; };
 		7795B405167DD82300AFF76C /* PIOMediaListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOMediaListViewController.m; path = ViewControllers/PIOMediaListViewController.m; sourceTree = "<group>"; };
+		779AE8A81680D94200E2D887 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Movie.h; path = Data/NSManagedObject/Movie.h; sourceTree = "<group>"; };
+		779AE8A91680D94200E2D887 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Movie.m; path = Data/NSManagedObject/Movie.m; sourceTree = "<group>"; };
+		779AE8AB1680D94200E2D887 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Episode.h; path = Data/NSManagedObject/Episode.h; sourceTree = "<group>"; };
+		779AE8AC1680D94200E2D887 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Episode.m; path = Data/NSManagedObject/Episode.m; sourceTree = "<group>"; };
+		779AE8AE1680D94200E2D887 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Video.h; path = Data/NSManagedObject/Video.h; sourceTree = "<group>"; };
+		779AE8AF1680D94200E2D887 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Video.m; path = Data/NSManagedObject/Video.m; sourceTree = "<group>"; };
 		77A73EAF167E3A4800FA7680 /* PIOTheTVDBAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOTheTVDBAPIClient.h; sourceTree = "<group>"; };
 		77A73EB0167E3A4800FA7680 /* PIOTheTVDBAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOTheTVDBAPIClient.m; sourceTree = "<group>"; };
 		77A73EC2167FA72E00FA7680 /* PIOFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOFileManager.h; sourceTree = "<group>"; };
@@ -137,14 +140,16 @@
 		770F499F167D45FF008CADCD /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				779AE8AE1680D94200E2D887 /* Video.h */,
+				779AE8AF1680D94200E2D887 /* Video.m */,
+				779AE8AB1680D94200E2D887 /* Episode.h */,
+				779AE8AC1680D94200E2D887 /* Episode.m */,
+				779AE8A81680D94200E2D887 /* Movie.h */,
+				779AE8A91680D94200E2D887 /* Movie.m */,
 				77A73EC9167FB8FF00FA7680 /* Show.h */,
 				77A73ECA167FB8FF00FA7680 /* Show.m */,
 				770F499C167D45FA008CADCD /* PutIOFile.h */,
 				770F499D167D45FA008CADCD /* PutIOFile.m */,
-				770F4996167D45FA008CADCD /* Movie.h */,
-				770F4997167D45FA008CADCD /* Movie.m */,
-				770F4993167D45FA008CADCD /* Episode.h */,
-				770F4994167D45FA008CADCD /* Episode.m */,
 				770F4990167D45FA008CADCD /* File.h */,
 				770F4991167D45FA008CADCD /* File.m */,
 			);
@@ -450,8 +455,6 @@
 				77A80BAC166C1D8E003CD050 /* PIOModel.xcdatamodeld in Sources */,
 				77FD382B166C1EAA00152690 /* PIOTraktAPIClient.m in Sources */,
 				770F4992167D45FA008CADCD /* File.m in Sources */,
-				770F4995167D45FA008CADCD /* Episode.m in Sources */,
-				770F4998167D45FA008CADCD /* Movie.m in Sources */,
 				770F499E167D45FA008CADCD /* PutIOFile.m in Sources */,
 				770F49A2167D4A41008CADCD /* PIOShowFilenameMatcher.m in Sources */,
 				7795B406167DD82300AFF76C /* PIOMediaListViewController.m in Sources */,
@@ -461,6 +464,9 @@
 				77A73EB1167E3A4800FA7680 /* PIOTheTVDBAPIClient.m in Sources */,
 				77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */,
 				77A73ECB167FB8FF00FA7680 /* Show.m in Sources */,
+				779AE8AA1680D94200E2D887 /* Movie.m in Sources */,
+				779AE8AD1680D94200E2D887 /* Episode.m in Sources */,
+				779AE8B01680D94200E2D887 /* Video.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

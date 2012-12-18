@@ -1,5 +1,5 @@
 //
-//  Movie.h
+//  Video.h
 //  pull.io
 //
 //  Created by Kyle Fuller on 18/12/2012.
@@ -8,13 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "Video.h"
 
-@class File;
 
-@interface Movie : Video
+@interface Video : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) File *file;
+@property (nonatomic, retain) NSNumber * watched;
 
 @end
