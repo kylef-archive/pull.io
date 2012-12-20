@@ -106,6 +106,10 @@
     NSString *episode = [filename substringWithRange:episodeRange];
     [result setEpisodeNumbers:@[[NSNumber numberWithInteger:[episode integerValue]]]];
 
+    if ([seriesName length] == 0) {
+        result = nil;
+    }
+
     return result;
 }
 
