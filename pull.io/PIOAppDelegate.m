@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
+#import "AFNetworkActivityIndicatorManager.h"
 #import "KFDataStore.h"
 #import "PIOAppDelegate.h"
 #import "PIOPutIOAPI2Client.h"
@@ -54,6 +55,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+
     KFDataStore *dataStore = [KFDataStore standardLocalDataStore];
     [self setDataStore:dataStore];
 
