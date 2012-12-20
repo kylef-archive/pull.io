@@ -15,6 +15,7 @@
     [super prepareForReuse];
 
     [[self posterImageView] cancelImageRequestOperation];
+    [[self posterImageView] setImage:nil];
 }
 
 @end

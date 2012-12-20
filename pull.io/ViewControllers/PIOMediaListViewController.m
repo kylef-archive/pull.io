@@ -15,6 +15,7 @@
 #import "PIOMediaListViewController.h"
 #import "PIOEpisodeListViewController.h"
 #import "Show.h"
+#import "File.h"
 #import "PIOMediaCell.h"
 
 #define kPIOMediaCell @"PIOMediaCell"
@@ -24,6 +25,11 @@
 @interface PIOMediaListViewController ()
 
 @end
+
+typedef enum {
+    PIOMediaListShowType = 0,
+    PIOMediaListFileType
+} PIOMediaListTypes;
 
 @implementation PIOMediaListViewController
 
@@ -42,15 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setTitle:NSLocalizedString(@"SHOW_LIST_TITLE", nil)];
-
-    NSFetchRequest *fetchRequest = [Show fetchRequestInManagedObjectContext:[self managedObjectContext]];
-    [fetchRequest setSortDescriptors:@[
-       [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
-    ]];
-
-    [self setFetchRequest:fetchRequest sectionNameKeyPath:nil];
-
     [[self collectionView] registerNib:[UINib nibWithNibName:kPIOMediaCell bundle:nil]
             forCellWithReuseIdentifier:kPIOMediaCell];
 
@@ -58,10 +55,53 @@
                                                                                   target:self
                                                                                   action:@selector(reloadData)];
     [[self navigationItem] setRightBarButtonItem:reloadButton];
+
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[
+        NSLocalizedString(@"MEDIA_LIST_SHOWS_FILTER", nil),
+        NSLocalizedString(@"MEDIA_LIST_FILES_FILTER", nil),
+    ]];
+
+    [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+    [segmentedControl addTarget:self
+                         action:@selector(changeListType:)
+               forControlEvents:UIControlEventValueChanged];
+
+    [[self navigationItem] setTitleView:segmentedControl];
+
+    [segmentedControl setSelectedSegmentIndex:0];
+    [self setListType:0];
 }
 
 - (void)reloadData {
     [[PIOAppDelegate sharedPutIOAPIClient] getFiles];
+}
+
+- (void)changeListType:(UISegmentedControl*)segmentedControl {
+    [self setListType:[segmentedControl selectedSegmentIndex]];
+}
+
+- (void)setListType:(PIOMediaListTypes)listType {
+    NSFetchRequest *fetchRequest;
+
+    switch (listType) {
+        case PIOMediaListShowType: {
+            fetchRequest = [Show fetchRequestInManagedObjectContext:[self managedObjectContext]];
+            [fetchRequest setSortDescriptors:@[
+                [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
+            ]];
+            break;
+        }
+
+        case PIOMediaListFileType: {
+            fetchRequest = [File fetchRequestInManagedObjectContext:[self managedObjectContext]];
+            [fetchRequest setSortDescriptors:@[
+                [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES],
+            ]];
+            break;
+        }
+    }
+    
+    [self setFetchRequest:fetchRequest sectionNameKeyPath:nil];
 }
 
 #pragma mark -
@@ -72,11 +112,20 @@
     PIOMediaCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kPIOMediaCell
                                                                            forIndexPath:indexPath];
 
-    Show *show = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    NSManagedObject *managedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
-    [[cell titleLabel] setText:[show name]];
-    NSURL *posterURL = [NSURL URLWithString:[show poster]];
-    [[cell posterImageView] setImageWithURL:posterURL];
+    NSString *name;
+    if ([managedObject isKindOfClass:[Show class]]) {
+        Show *show = (Show*)managedObject;
+
+        name = [(Show*)managedObject name];
+        NSURL *posterURL = [NSURL URLWithString:[show poster]];
+        [[cell posterImageView] setImageWithURL:posterURL];
+    } else {
+        name = [(File*)managedObject filename];
+    }
+
+    [[cell titleLabel] setText:name];
 
     return cell;
 }
@@ -85,11 +134,13 @@
 {
     NSManagedObject *managedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
-    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [managedObjectContext setParentContext:[self managedObjectContext]];
-    PIOEpisodeListViewController *episodesListViewController = [[PIOEpisodeListViewController alloc] initWithManagedObjectContext:managedObjectContext];
-    [episodesListViewController setShow:[managedObject objectID]];
-    [[self navigationController] pushViewController:episodesListViewController animated:YES];
+    if ([managedObject isKindOfClass:[Show class]]) {
+        NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [managedObjectContext setParentContext:[self managedObjectContext]];
+        PIOEpisodeListViewController *episodesListViewController = [[PIOEpisodeListViewController alloc] initWithManagedObjectContext:managedObjectContext];
+        [episodesListViewController setShow:[managedObject objectID]];
+        [[self navigationController] pushViewController:episodesListViewController animated:YES];
+    }
 }
 
 @end
