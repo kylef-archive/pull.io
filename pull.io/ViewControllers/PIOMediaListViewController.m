@@ -8,6 +8,9 @@
 
 #import "UIImageView+AFNetworking.h"
 
+#import "PIOAppDelegate.h"
+#import "PIOPutIOAPI2Client.h"
+
 #import "NSManagedObject+KFData.h"
 #import "PIOMediaListViewController.h"
 #import "PIOEpisodeListViewController.h"
@@ -50,6 +53,15 @@
 
     [[self collectionView] registerNib:[UINib nibWithNibName:kPIOMediaCell bundle:nil]
             forCellWithReuseIdentifier:kPIOMediaCell];
+
+    UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                  target:self
+                                                                                  action:@selector(reloadData)];
+    [[self navigationItem] setRightBarButtonItem:reloadButton];
+}
+
+- (void)reloadData {
+    [[PIOAppDelegate sharedPutIOAPIClient] getFiles];
 }
 
 #pragma mark -
