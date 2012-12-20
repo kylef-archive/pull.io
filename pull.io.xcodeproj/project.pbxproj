@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		71A9872C9AE040CA8F744608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32D63AAAE4BFC886211ED /* libPods.a */; };
+		770205261683BD5F00FC828F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 770205231683BD5F00FC828F /* Localizable.strings */; };
 		770F4992167D45FA008CADCD /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F4991167D45FA008CADCD /* File.m */; };
 		770F499E167D45FA008CADCD /* PutIOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F499D167D45FA008CADCD /* PutIOFile.m */; };
 		770F49A2167D4A41008CADCD /* PIOShowFilenameMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		5BA32D63AAAE4BFC886211ED /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		770205241683BD5F00FC828F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		770F4990167D45FA008CADCD /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Data/NSManagedObject/File.h; sourceTree = "<group>"; };
 		770F4991167D45FA008CADCD /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Data/NSManagedObject/File.m; sourceTree = "<group>"; };
 		770F499C167D45FA008CADCD /* PutIOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutIOFile.h; path = Data/NSManagedObject/PutIOFile.h; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		77A80B55166988C3003CD050 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				770205231683BD5F00FC828F /* Localizable.strings */,
 				77A80B56166988C3003CD050 /* pull.io-Info.plist */,
 				77A80B57166988C3003CD050 /* InfoPlist.strings */,
 				77A80B5A166988C3003CD050 /* main.m */,
@@ -397,6 +400,7 @@
 				77A80B63166988C3003CD050 /* Default@2x.png in Resources */,
 				77A80B65166988C3003CD050 /* Default-568h@2x.png in Resources */,
 				7776BE201682748B00A5769F /* PIOMediaCell.xib in Resources */,
+				770205261683BD5F00FC828F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +505,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		770205231683BD5F00FC828F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				770205241683BD5F00FC828F /* en */,
+			);
+			name = Localizable.strings;
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		77A80B57166988C3003CD050 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
