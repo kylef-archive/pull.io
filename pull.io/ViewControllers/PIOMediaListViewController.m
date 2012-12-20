@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
+#import <MediaPlayer/MediaPlayer.h>
 #import "UIImageView+AFNetworking.h"
 
 #import "PIOAppDelegate.h"
@@ -140,6 +141,13 @@ typedef enum {
         PIOEpisodeListViewController *episodesListViewController = [[PIOEpisodeListViewController alloc] initWithManagedObjectContext:managedObjectContext];
         [episodesListViewController setShow:[managedObject objectID]];
         [[self navigationController] pushViewController:episodesListViewController animated:YES];
+    } else if ([managedObject isKindOfClass:[File class]]) {
+        File *file = (File*)managedObject;
+
+        NSURL *URL = [file URL];
+
+        MPMoviePlayerViewController *playerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:URL];
+        [self presentMoviePlayerViewControllerAnimated:playerViewController];
     }
 }
 
