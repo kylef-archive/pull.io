@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import "KFDataTableViewController.h"
+#import "KFDataCollectionViewController.h"
 
-@interface PIOMediaListViewController : KFDataTableViewController
+@interface PIOMediaListViewController : KFDataCollectionViewController
+
+- (id)initWithDataStore:(KFDataStore*)dataStore;
 
 @end

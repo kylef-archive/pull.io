@@ -17,13 +17,15 @@
 		771CF184167DDBA900AF348C /* Episode+PIOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF183167DDBA900AF348C /* Episode+PIOExtensions.m */; };
 		771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */; };
 		771CF189167DE19300AF348C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771CF188167DE19300AF348C /* MediaPlayer.framework */; };
+		7776BE1E1682747600A5769F /* PIOMediaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7776BE1D1682747600A5769F /* PIOMediaCell.m */; };
+		7776BE201682748B00A5769F /* PIOMediaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7776BE1F1682748B00A5769F /* PIOMediaCell.xib */; };
+		7776BE2316827AE400A5769F /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 7776BE2216827AE400A5769F /* Show.m */; };
 		7795B406167DD82300AFF76C /* PIOMediaListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7795B405167DD82300AFF76C /* PIOMediaListViewController.m */; };
 		779AE8AA1680D94200E2D887 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 779AE8A91680D94200E2D887 /* Movie.m */; };
 		779AE8AD1680D94200E2D887 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 779AE8AC1680D94200E2D887 /* Episode.m */; };
 		779AE8B01680D94200E2D887 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 779AE8AF1680D94200E2D887 /* Video.m */; };
 		77A73EB1167E3A4800FA7680 /* PIOTheTVDBAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73EB0167E3A4800FA7680 /* PIOTheTVDBAPIClient.m */; };
 		77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73EC3167FA72E00FA7680 /* PIOFileManager.m */; };
-		77A73ECB167FB8FF00FA7680 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A73ECA167FB8FF00FA7680 /* Show.m */; };
 		77A80B4F166988C3003CD050 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B4E166988C3003CD050 /* UIKit.framework */; };
 		77A80B51166988C3003CD050 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B50166988C3003CD050 /* Foundation.framework */; };
 		77A80B53166988C3003CD050 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A80B52166988C3003CD050 /* CoreGraphics.framework */; };
@@ -70,6 +72,11 @@
 		771CF185167DDE0300AF348C /* PIOEpisodeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOEpisodeListViewController.h; path = ViewControllers/PIOEpisodeListViewController.h; sourceTree = "<group>"; };
 		771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOEpisodeListViewController.m; path = ViewControllers/PIOEpisodeListViewController.m; sourceTree = "<group>"; };
 		771CF188167DE19300AF348C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		7776BE1C1682747600A5769F /* PIOMediaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOMediaCell.h; path = ViewControllers/PIOMediaCell.h; sourceTree = "<group>"; };
+		7776BE1D1682747600A5769F /* PIOMediaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOMediaCell.m; path = ViewControllers/PIOMediaCell.m; sourceTree = "<group>"; };
+		7776BE1F1682748B00A5769F /* PIOMediaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PIOMediaCell.xib; path = ViewControllers/PIOMediaCell.xib; sourceTree = "<group>"; };
+		7776BE2116827AE400A5769F /* Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Show.h; path = Data/NSManagedObject/Show.h; sourceTree = "<group>"; };
+		7776BE2216827AE400A5769F /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = Data/NSManagedObject/Show.m; sourceTree = "<group>"; };
 		7795B404167DD82300AFF76C /* PIOMediaListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOMediaListViewController.h; path = ViewControllers/PIOMediaListViewController.h; sourceTree = "<group>"; };
 		7795B405167DD82300AFF76C /* PIOMediaListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOMediaListViewController.m; path = ViewControllers/PIOMediaListViewController.m; sourceTree = "<group>"; };
 		779AE8A81680D94200E2D887 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Movie.h; path = Data/NSManagedObject/Movie.h; sourceTree = "<group>"; };
@@ -82,8 +89,6 @@
 		77A73EB0167E3A4800FA7680 /* PIOTheTVDBAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOTheTVDBAPIClient.m; sourceTree = "<group>"; };
 		77A73EC2167FA72E00FA7680 /* PIOFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOFileManager.h; sourceTree = "<group>"; };
 		77A73EC3167FA72E00FA7680 /* PIOFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOFileManager.m; sourceTree = "<group>"; };
-		77A73EC9167FB8FF00FA7680 /* Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Show.h; path = Data/NSManagedObject/Show.h; sourceTree = "<group>"; };
-		77A73ECA167FB8FF00FA7680 /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = Data/NSManagedObject/Show.m; sourceTree = "<group>"; };
 		77A80B4A166988C3003CD050 /* pull.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pull.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A80B4E166988C3003CD050 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		77A80B50166988C3003CD050 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,14 +145,14 @@
 		770F499F167D45FF008CADCD /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
+				7776BE2116827AE400A5769F /* Show.h */,
+				7776BE2216827AE400A5769F /* Show.m */,
 				779AE8AE1680D94200E2D887 /* Video.h */,
 				779AE8AF1680D94200E2D887 /* Video.m */,
 				779AE8AB1680D94200E2D887 /* Episode.h */,
 				779AE8AC1680D94200E2D887 /* Episode.m */,
 				779AE8A81680D94200E2D887 /* Movie.h */,
 				779AE8A91680D94200E2D887 /* Movie.m */,
-				77A73EC9167FB8FF00FA7680 /* Show.h */,
-				77A73ECA167FB8FF00FA7680 /* Show.m */,
 				770F499C167D45FA008CADCD /* PutIOFile.h */,
 				770F499D167D45FA008CADCD /* PutIOFile.m */,
 				770F4990167D45FA008CADCD /* File.h */,
@@ -174,6 +179,9 @@
 				7795B405167DD82300AFF76C /* PIOMediaListViewController.m */,
 				771CF185167DDE0300AF348C /* PIOEpisodeListViewController.h */,
 				771CF186167DDE0300AF348C /* PIOEpisodeListViewController.m */,
+				7776BE1C1682747600A5769F /* PIOMediaCell.h */,
+				7776BE1D1682747600A5769F /* PIOMediaCell.m */,
+				7776BE1F1682748B00A5769F /* PIOMediaCell.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -388,6 +396,7 @@
 				77A80B61166988C3003CD050 /* Default.png in Resources */,
 				77A80B63166988C3003CD050 /* Default@2x.png in Resources */,
 				77A80B65166988C3003CD050 /* Default-568h@2x.png in Resources */,
+				7776BE201682748B00A5769F /* PIOMediaCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,10 +472,11 @@
 				771CF187167DDE0300AF348C /* PIOEpisodeListViewController.m in Sources */,
 				77A73EB1167E3A4800FA7680 /* PIOTheTVDBAPIClient.m in Sources */,
 				77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */,
-				77A73ECB167FB8FF00FA7680 /* Show.m in Sources */,
 				779AE8AA1680D94200E2D887 /* Movie.m in Sources */,
 				779AE8AD1680D94200E2D887 /* Episode.m in Sources */,
 				779AE8B01680D94200E2D887 /* Video.m in Sources */,
+				7776BE1E1682747600A5769F /* PIOMediaCell.m in Sources */,
+				7776BE2316827AE400A5769F /* Show.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
