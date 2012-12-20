@@ -40,9 +40,9 @@
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
     if (self = [self init]) {
         NSFetchRequest *fetchRequest = [Show fetchRequestInManagedObjectContext:managedObjectContext];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tvdb_id = nil"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tvdb_id == 0"];
         [fetchRequest setPredicate:predicate];
-        
+
         [fetchRequest setSortDescriptors:@[
             [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
         ]];
@@ -116,28 +116,51 @@
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, DDXMLDocument *XMLDocument) {
               NSArray *nodes = [XMLDocument nodesForXPath:@"//Data/Series" error:nil];
-              
+
               if ([nodes count]) {
                   DDXMLElement *element = [nodes objectAtIndex:0];
-                  
+
                   DDXMLElement *seriesIDElement = [[element elementsForName:@"seriesid"] lastObject];
                   DDXMLNode *seriesIDNode = [seriesIDElement childAtIndex:0];
                   NSString *seriesIDString = [seriesIDNode stringValue];
                   NSInteger seriesIDInteger = [seriesIDString integerValue];
                   NSNumber *seriesID = [NSNumber numberWithInteger:seriesIDInteger];
-                  
-                  DDXMLElement *overviewElement = [[element elementsForName:@"Overview"] lastObject];
-                  DDXMLNode *overviewNode = [overviewElement childAtIndex:0];
-                  NSString *overview = [overviewNode stringValue];;
-                  
-                  DDXMLElement *imdbIDElement = [[element elementsForName:@"IMDB_ID"] lastObject];
-                  DDXMLNode *imdbIDNode = [imdbIDElement childAtIndex:0];
-                  NSString *imdbID = [imdbIDNode stringValue];
 
-                  [[show managedObjectContext] performWriteBlock:^{
-                      [show setTvdb_id:seriesID];
-                      [show setOverview:overview];
+                  NSString *path = [kPIOTheTVDBAPIKey stringByAppendingFormat:@"/series/%@/", seriesID];
+
+                  [self getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, DDXMLDocument *XMLDocument) {
+                      NSArray *nodes = [XMLDocument nodesForXPath:@"//Data/Series" error:nil];
+
+                      if ([nodes count]) {
+                          DDXMLElement *element = [nodes objectAtIndex:0];
+
+                          DDXMLElement *overviewElement = [[element elementsForName:@"Overview"] lastObject];
+                          DDXMLNode *overviewNode = [overviewElement childAtIndex:0];
+                          NSString *overview = [overviewNode stringValue];;
+
+                          DDXMLElement *posterElement = [[element elementsForName:@"poster"] lastObject];
+                          DDXMLNode *posterNode = [posterElement childAtIndex:0];
+                          NSString *poster = [posterNode stringValue];
+
+                          NSString *posterURL;
+                          if (poster) {
+                              posterURL = [@"http://thetvdb.com/banners/" stringByAppendingString:poster];
+                          }
+
+                          DDXMLElement *imdbIDElement = [[element elementsForName:@"IMDB_ID"] lastObject];
+                          DDXMLNode *imdbIDNode = [imdbIDElement childAtIndex:0];
+                          NSString *imdbID = [imdbIDNode stringValue];
+
+                          [[show managedObjectContext] performWriteBlock:^{
+                              [show setTvdb_id:seriesID];
+                              [show setOverview:overview];
+                              [show setPoster:posterURL];
+                          }];
+                      }
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"TheTVDBAPI findShow inner failure: %@", error);
                   }];
+
               }
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"TheTVDBAPI findShow failure: %@", error);
