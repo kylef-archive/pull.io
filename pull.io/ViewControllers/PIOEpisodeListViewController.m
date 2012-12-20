@@ -62,27 +62,17 @@
     });
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (NSString*)fetchedResultsTableController:(KFFetchedResultsTableController *)fetchedResultsTableController
-           reuseIdentifierForManagedObject:(NSManagedObject *)managedObject
-                               atIndexPath:(NSIndexPath *)indexPath
+- (NSString*)tableView:(UITableView *)tableView
+    reuseIdentifierForManagedObject:(NSManagedObject *)managedObject
+           atIndexPath:(NSIndexPath *)indexPath
 {
     return @"cell";
 }
 
-- (void)fetchedResultsTableController:(KFFetchedResultsTableController *)fetchedResultsTableController
-                       configuredCell:(UITableViewCell *)cell
-                     forManagedObject:(Episode *)episode
-                          atIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView*)tableView
+   configuredCell:(UITableViewCell *)cell
+ forManagedObject:(Episode *)episode
+      atIndexPath:(NSIndexPath *)indexPath
 {
     NSString *title = [episode name];
 
@@ -95,8 +85,8 @@
     [[cell textLabel] setText:title];
 }
 
-- (UITableViewCell*)fetchedResultsTableController:(KFFetchedResultsTableController *)fetchedResultsTableController
-                           cellForReuseIdentifier:(NSString *)reuseIdentifier
+- (UITableViewCell*)tableView:(UITableView*)tableView
+       cellForReuseIdentifier:(NSString *)reuseIdentifier
 {
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
 }
@@ -104,7 +94,7 @@
 #pragma mark -
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Episode *episode = (Episode*)[[self fetchedResultsTableController] managedObjectForIndexPath:indexPath];
+    Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     File *file = [episode file];
 
     NSURL *URL = [file URL];
