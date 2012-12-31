@@ -8,3 +8,6 @@
 
 "MEDIA_LIST_SHOWS_FILTER" = "TV Shows";
 "MEDIA_LIST_FILES_FILTER" = "Files";
+
+"PLAY_TIMESTAMP" = "Resume from %@";
+"PLAY_FROM_START" = "Play from beginning";

@@ -9,11 +9,14 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 @class File;
+@class Video;
 
 @interface PIOVideoPlayerViewController : MPMoviePlayerViewController
 
-@property (nonatomic, strong, readonly) File *file;
+@property (nonatomic, strong, readonly) Video *video;
+@property (nonatomic, assign) BOOL resumeFromPreviousPlayback;
 
+- (id)initWithVideo:(Video*)video;
 - (id)initWithFile:(File*)file;
 
 @end

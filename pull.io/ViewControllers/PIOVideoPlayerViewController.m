@@ -7,8 +7,8 @@
 //
 
 #import "NSManagedObjectContext+KFData.h"
-#import "File.h"
 #import "Video.h"
+#import "File.h"
 
 #import "PIOVideoPlayerViewController.h"
 
@@ -18,13 +18,23 @@
 
 @implementation PIOVideoPlayerViewController
 
-- (id)initWithFile:(File*)file {
-    NSURL *URL = [file URL];
+- (id)initWithVideo:(Video*)video {
+    File *file = [video file];
 
-    if (self = [super initWithContentURL:URL]) {
-        _file = file;
+    if (self = [self initWithFile:file]) {
+        _video = video;
+        _resumeFromPreviousPlayback = NO;
     }
 
+    return self;
+}
+
+- (id)initWithFile:(File*)file {
+    NSURL *URL = [file URL];
+    
+    if (self = [super initWithContentURL:URL]) {
+    }
+    
     return self;
 }
 
@@ -35,16 +45,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    MPMoviePlayerController *moviePlayer = [self moviePlayer];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateState)
-                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-                                               object:moviePlayer];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateState)
-                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
-                                               object:moviePlayer];
+    Video *video = [self video];
+    if (video) {
+        MPMoviePlayerController *moviePlayer = [self moviePlayer];
+
+        if ([self resumeFromPreviousPlayback]) {
+            NSTimeInterval timestamp = [[video playback_time] doubleValue];
+            [moviePlayer setInitialPlaybackTime:timestamp];
+        }
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(updateState)
+                                                     name:MPMoviePlayerPlaybackDidFinishNotification
+                                                   object:moviePlayer];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(updateState)
+                                                     name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                                   object:moviePlayer];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,10 +76,9 @@
     NSTimeInterval duration = [[self moviePlayer] duration];
     NSTimeInterval currentPlaybackTime = [[self moviePlayer] currentPlaybackTime];
 
-    File *file = [self file];
-    [[file managedObjectContext] performWriteBlock:^{
-        Video *video = [file video];
+    Video *video = [self video];
 
+    [[video managedObjectContext] performWriteBlock:^{
         [video setPlayback_time:[NSNumber numberWithDouble:currentPlaybackTime]];
 
         if (([[video watched] boolValue] == NO) &&

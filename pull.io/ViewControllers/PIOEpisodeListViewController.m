@@ -7,6 +7,7 @@
 //
 
 #import "NSManagedObject+KFData.h"
+#import "NSString+PIOExtensions.h"
 
 #import "PIOAppDelegate.h"
 #import "PIOPutIOAPI2Client.h"
@@ -18,7 +19,9 @@
 #import "Episode+PIOExtensions.h"
 #import "File.h"
 
-@interface PIOEpisodeListViewController ()
+@interface PIOEpisodeListViewController () <UIActionSheetDelegate>
+
+@property (nonatomic, strong) Episode *selectedEpisode;
 
 @end
 
@@ -98,8 +101,51 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
 
-    PIOVideoPlayerViewController *playerViewController = [[PIOVideoPlayerViewController alloc] initWithFile:[episode file]];
+    double playbackTime = [[episode playback_time] doubleValue];
+
+    if (playbackTime > 1.0) {
+        [self setSelectedEpisode:episode];
+
+        NSString *resumeString = [NSString stringWithFormat:NSLocalizedString(@"PLAY_TIMESTAMP", nil), [NSString stringWithTimeInterval:playbackTime]];
+
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:nil
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:resumeString,
+                                                                          NSLocalizedString(@"PLAY_FROM_START", nil), nil];
+
+        [actionSheet showFromRect:[tableView rectForRowAtIndexPath:indexPath]
+                           inView:tableView
+                         animated:YES];
+    } else {
+        [self playEpisode:episode resumeFromPreviousPlayback:NO];
+    }
+}
+
+- (void)playEpisode:(Episode*)episode resumeFromPreviousPlayback:(BOOL)resume {
+    PIOVideoPlayerViewController *playerViewController = [[PIOVideoPlayerViewController alloc] initWithVideo:episode];
+    [playerViewController setResumeFromPreviousPlayback:resume];
     [self presentMoviePlayerViewControllerAnimated:playerViewController];
+}
+
+#pragma mark UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self playEpisode:[self selectedEpisode] resumeFromPreviousPlayback:YES];
+            break;
+        case 1:
+            [self playEpisode:[self selectedEpisode] resumeFromPreviousPlayback:NO];
+            break;
+    }
+
+    [self setSelectedEpisode:nil];
+}
+
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet {
+    [self setSelectedEpisode:nil];
 }
 
 @end
