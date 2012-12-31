@@ -43,6 +43,10 @@
 		77A80B7A166988C3003CD050 /* pull_ioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A80B79166988C3003CD050 /* pull_ioTests.m */; };
 		77A80B9A166A2625003CD050 /* PIOPutIOAPI2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A80B99166A2625003CD050 /* PIOPutIOAPI2Client.m */; };
 		77A80BAC166C1D8E003CD050 /* PIOModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77A80BAA166C1D8E003CD050 /* PIOModel.xcdatamodeld */; };
+		77E54AF31691292B000654D5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AEF1691292B000654D5 /* Icon.png */; };
+		77E54AF41691292B000654D5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF01691292B000654D5 /* Icon@2x.png */; };
+		77E54AF51691292B000654D5 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF11691292B000654D5 /* Icon~ipad.png */; };
+		77E54AF61691292B000654D5 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF21691292B000654D5 /* Icon~ipad@2x.png */; };
 		77FD382B166C1EAA00152690 /* PIOTraktAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD382A166C1EAA00152690 /* PIOTraktAPIClient.m */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +117,10 @@
 		77A80B98166A2625003CD050 /* PIOPutIOAPI2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOPutIOAPI2Client.h; path = API/put.io/PIOPutIOAPI2Client.h; sourceTree = "<group>"; };
 		77A80B99166A2625003CD050 /* PIOPutIOAPI2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOPutIOAPI2Client.m; path = API/put.io/PIOPutIOAPI2Client.m; sourceTree = "<group>"; };
 		77A80BAB166C1D8E003CD050 /* PIOModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PIOModel.xcdatamodel; sourceTree = "<group>"; };
+		77E54AEF1691292B000654D5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		77E54AF01691292B000654D5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		77E54AF11691292B000654D5 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
+		77E54AF21691292B000654D5 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad@2x.png"; sourceTree = "<group>"; };
 		77FD3829166C1EAA00152690 /* PIOTraktAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOTraktAPIClient.h; path = API/trakt/PIOTraktAPIClient.h; sourceTree = "<group>"; };
 		77FD382A166C1EAA00152690 /* PIOTraktAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOTraktAPIClient.m; path = API/trakt/PIOTraktAPIClient.m; sourceTree = "<group>"; };
 		A04DB9BE92E745B682DE0801 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -237,6 +245,7 @@
 				77A80B5E166988C3003CD050 /* PIOAppDelegate.m */,
 				7795B408167DD82800AFF76C /* ViewControllers */,
 				77A80B55166988C3003CD050 /* Supporting Files */,
+				77E54AF816912939000654D5 /* Resources */,
 				77A80B9C166A2629003CD050 /* API */,
 				77A80BAD166C1D93003CD050 /* Data */,
 				770F49A0167D4A41008CADCD /* PIOShowFilenameMatcher.h */,
@@ -255,9 +264,6 @@
 				77A80B57166988C3003CD050 /* InfoPlist.strings */,
 				77A80B5A166988C3003CD050 /* main.m */,
 				77A80B5C166988C3003CD050 /* pull.io-Prefix.pch */,
-				77A80B60166988C3003CD050 /* Default.png */,
-				77A80B62166988C3003CD050 /* Default@2x.png */,
-				77A80B64166988C3003CD050 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -310,6 +316,37 @@
 				771CF17D167DDA7100AF348C /* NSManagedObjectExtensions */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		77E54AEE1691292B000654D5 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				77E54AEF1691292B000654D5 /* Icon.png */,
+				77E54AF01691292B000654D5 /* Icon@2x.png */,
+				77E54AF11691292B000654D5 /* Icon~ipad.png */,
+				77E54AF21691292B000654D5 /* Icon~ipad@2x.png */,
+			);
+			name = Icons;
+			path = Resources/Icons;
+			sourceTree = "<group>";
+		};
+		77E54AF716912932000654D5 /* Launch Images */ = {
+			isa = PBXGroup;
+			children = (
+				77A80B60166988C3003CD050 /* Default.png */,
+				77A80B62166988C3003CD050 /* Default@2x.png */,
+				77A80B64166988C3003CD050 /* Default-568h@2x.png */,
+			);
+			name = "Launch Images";
+			sourceTree = "<group>";
+		};
+		77E54AF816912939000654D5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				77E54AF716912932000654D5 /* Launch Images */,
+				77E54AEE1691292B000654D5 /* Icons */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		77FD382D166C1EB200152690 /* Trakt */ = {
@@ -401,6 +438,10 @@
 				77A80B65166988C3003CD050 /* Default-568h@2x.png in Resources */,
 				7776BE201682748B00A5769F /* PIOMediaCell.xib in Resources */,
 				770205261683BD5F00FC828F /* Localizable.strings in Resources */,
+				77E54AF31691292B000654D5 /* Icon.png in Resources */,
+				77E54AF41691292B000654D5 /* Icon@2x.png in Resources */,
+				77E54AF51691292B000654D5 /* Icon~ipad.png in Resources */,
+				77E54AF61691292B000654D5 /* Icon~ipad@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
