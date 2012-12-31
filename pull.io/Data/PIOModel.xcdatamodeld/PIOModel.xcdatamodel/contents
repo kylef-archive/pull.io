@@ -4,11 +4,11 @@
         <attribute name="episode" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="season" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="show" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Show" inverseName="episodes" inverseEntity="Show" syncable="YES"/>
+        <relationship name="show" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="episodes" inverseEntity="Show" syncable="YES"/>
     </entity>
     <entity name="File" representedClassName="File" syncable="YES">
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="file" inverseEntity="Video" syncable="YES"/>
+        <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Video" inverseName="file" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="Movie" representedClassName="Movie" parentEntity="Video" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -26,7 +26,7 @@
     <entity name="Video" representedClassName="Video" isAbstract="YES" syncable="YES">
         <attribute name="playback_time" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="watched" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="file" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="File" inverseName="video" inverseEntity="File" syncable="YES"/>
+        <relationship name="file" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="File" inverseName="video" inverseEntity="File" syncable="YES"/>
     </entity>
     <elements>
         <element name="Episode" positionX="196" positionY="387" width="128" height="105"/>

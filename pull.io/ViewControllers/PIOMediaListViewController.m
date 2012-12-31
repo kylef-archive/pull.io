@@ -87,6 +87,7 @@ typedef enum {
     switch (listType) {
         case PIOMediaListShowType: {
             fetchRequest = [Show fetchRequestInManagedObjectContext:[self managedObjectContext]];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"episodes.@count > 0"]];
             [fetchRequest setSortDescriptors:@[
                 [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
             ]];
