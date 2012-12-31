@@ -120,6 +120,8 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
 
         [managedObjectContext performWriteBlock:^{
             NSArray *files = [responseObject objectForKey:@"files"];
+            NSMutableSet *updatedFiles = [[NSMutableSet alloc] initWithCapacity:[files count]];
+
             for (NSDictionary *file in files) {
                 NSString *contentType = [file objectForKey:@"content_type"];
 
@@ -137,9 +139,14 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
                         [managedFile setFilename:filename];
                     }
 
+                    [updatedFiles addObject:idx];
                     NSLog(@"Adding file %@", filename);
                 }
             }
+
+            NSPredicate *removalPredicate = [NSPredicate predicateWithFormat:@"NOT (id IN %@)", updatedFiles];
+            [PutIOFile removeAllInManagedObjectContext:managedObjectContext
+                                         withPredicate:removalPredicate];
         }];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Get files failed: %@", error);
