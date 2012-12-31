@@ -6,14 +6,13 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import <MediaPlayer/MediaPlayer.h>
-
 #import "NSManagedObject+KFData.h"
 
 #import "PIOAppDelegate.h"
 #import "PIOPutIOAPI2Client.h"
 
 #import "PIOEpisodeListViewController.h"
+#import "PIOVideoPlayerViewController.h"
 
 #import "Show+PIOExtension.h"
 #import "Episode+PIOExtensions.h"
@@ -83,6 +82,9 @@
     }
 
     [[cell textLabel] setText:title];
+
+    BOOL isWatched = [[episode watched] boolValue];
+    [cell setAccessoryType:(isWatched ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone)];
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
@@ -95,11 +97,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
-    File *file = [episode file];
 
-    NSURL *URL = [file URL];
-
-    MPMoviePlayerViewController *playerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:URL];
+    PIOVideoPlayerViewController *playerViewController = [[PIOVideoPlayerViewController alloc] initWithFile:[episode file]];
     [self presentMoviePlayerViewControllerAnimated:playerViewController];
 }
 

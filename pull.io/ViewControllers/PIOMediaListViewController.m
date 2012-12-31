@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import <MediaPlayer/MediaPlayer.h>
 #import "UIImageView+AFNetworking.h"
 
 #import "PIOAppDelegate.h"
@@ -14,6 +13,7 @@
 
 #import "NSManagedObject+KFData.h"
 #import "PIOMediaListViewController.h"
+#import "PIOVideoPlayerViewController.h"
 #import "PIOEpisodeListViewController.h"
 #import "Show.h"
 #import "File.h"
@@ -144,9 +144,7 @@ typedef enum {
     } else if ([managedObject isKindOfClass:[File class]]) {
         File *file = (File*)managedObject;
 
-        NSURL *URL = [file URL];
-
-        MPMoviePlayerViewController *playerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:URL];
+        PIOVideoPlayerViewController *playerViewController = [[PIOVideoPlayerViewController alloc] initWithFile:file];
         [self presentMoviePlayerViewControllerAnimated:playerViewController];
     }
 }

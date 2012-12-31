@@ -31,7 +31,7 @@
         [self setFilenameMatcher:filenameMatcher];
 
         NSFetchRequest *fetchRequest = [File fetchRequestInManagedObjectContext:managedObjectContext];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"episode = nil AND movie = nil"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video = nil"];
         [fetchRequest setPredicate:predicate];
 
         [fetchRequest setSortDescriptors:@[
@@ -99,7 +99,7 @@
 }
 
 - (void)matchFile:(File*)file {
-    if ([file episode] == nil) {
+    if ([file video] == nil) {
         NSManagedObjectContext *managedObjectContext = [[self fetchedResultsController] managedObjectContext];
         
         PIOShowFilenameMatch *match = [[self filenameMatcher] matchFilename:[file filename]];
@@ -113,7 +113,7 @@
                                            Episode:[[match episodeNumbers] lastObject]
                             inManagedObjectContext:managedObjectContext];
             
-            [file setEpisode:episode];
+            [file setVideo:episode];
             
             [managedObjectContext nestedSave];
         }

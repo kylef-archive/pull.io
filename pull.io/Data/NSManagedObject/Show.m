@@ -2,7 +2,7 @@
 //  Show.m
 //  pull.io
 //
-//  Created by Kyle Fuller on 19/12/2012.
+//  Created by Kyle Fuller on 31/12/2012.
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 
 @dynamic name;
 @dynamic overview;
-@dynamic tvdb_id;
 @dynamic poster;
+@dynamic tvdb_id;
 @dynamic episodes;
 
 @end

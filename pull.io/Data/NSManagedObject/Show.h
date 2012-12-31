@@ -2,7 +2,7 @@
 //  Show.h
 //  pull.io
 //
-//  Created by Kyle Fuller on 19/12/2012.
+//  Created by Kyle Fuller on 31/12/2012.
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
@@ -15,8 +15,8 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * overview;
-@property (nonatomic, retain) NSNumber * tvdb_id;
 @property (nonatomic, retain) NSString * poster;
+@property (nonatomic, retain) NSNumber * tvdb_id;
 @property (nonatomic, retain) NSSet *episodes;
 @end
 
