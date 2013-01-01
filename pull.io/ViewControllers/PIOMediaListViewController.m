@@ -121,7 +121,7 @@ typedef enum {
     if ([managedObject isKindOfClass:[Show class]]) {
         Show *show = (Show*)managedObject;
 
-        name = [(Show*)managedObject name];
+        name = [show name];
         NSURL *posterURL = [NSURL URLWithString:[show poster]];
         [[cell posterImageView] setImageWithURL:posterURL];
     } else {

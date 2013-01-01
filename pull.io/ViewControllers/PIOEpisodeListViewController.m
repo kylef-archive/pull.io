@@ -37,15 +37,25 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setTitle:title];
 
-            UIFont *font = [UIFont systemFontOfSize:16];
-            CGSize size = [[self tableView] frame].size;
-            size = [overview sizeWithFont:font constrainedToSize:CGSizeMake(size.width, MAXFLOAT)];
-            
-            UILabel *headerView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-            [headerView setFont:font];
-            [headerView setNumberOfLines:0];
-            [headerView setText:overview];
-            [[self tableView] setTableHeaderView:headerView];
+            if ([overview length] > 0) {
+                UIFont *font = [UIFont systemFontOfSize:16];
+                CGSize size = [[self tableView] frame].size;
+                CGSize textSize = [overview sizeWithFont:font constrainedToSize:CGSizeMake(size.width - 20, MAXFLOAT)];
+                size.height = textSize.height + 20;
+
+                UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+                UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, textSize.width, textSize.height)];
+                [descriptionLabel setFont:font];
+                [descriptionLabel setNumberOfLines:0];
+                [descriptionLabel setText:overview];
+                [headerView addSubview:descriptionLabel];
+
+                UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height - 1, size.width, 1)];
+                [borderView setBackgroundColor:[UIColor lightGrayColor]];
+                [headerView addSubview:borderView];
+
+                [[self tableView] setTableHeaderView:headerView];
+            }
         });
     }];
 
