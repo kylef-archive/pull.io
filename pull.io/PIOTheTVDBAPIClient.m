@@ -155,6 +155,8 @@
                               [show setTvdb_id:seriesID];
                               [show setOverview:overview];
                               [show setPoster:posterURL];
+
+                              [self updatedEpisodesForShow:show];
                           }];
                       }
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -165,6 +167,45 @@
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"TheTVDBAPI findShow failure: %@", error);
           }];
+}
+
+- (void)updatedEpisodesForShow:(Show*)show {
+    NSString *path = [kPIOTheTVDBAPIKey stringByAppendingFormat:@"/series/%@/all/", [show tvdb_id]];
+
+    [self getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, DDXMLDocument *XMLDocument) {
+        NSArray *nodes = [XMLDocument nodesForXPath:@"//Data/Episode" error:nil];
+        NSManagedObjectContext *managedObjectContext = [show managedObjectContext];
+
+        for (DDXMLElement *element in nodes) {
+            DDXMLElement *episodeNumberElement = [[element elementsForName:@"EpisodeNumber"] lastObject];
+            DDXMLNode *episodeNumberNode = [episodeNumberElement childAtIndex:0];
+            NSString *episodeNumberString = [episodeNumberNode stringValue];
+            NSInteger episodeNumberInteger = [episodeNumberString integerValue];
+            NSNumber *episodeNumber = [NSNumber numberWithInteger:episodeNumberInteger];
+
+            DDXMLElement *seasonNumberElement = [[element elementsForName:@"SeasonNumber"] lastObject];
+            DDXMLNode *seasonNumberNode = [seasonNumberElement childAtIndex:0];
+            NSString *seasonNumberString = [seasonNumberNode stringValue];
+            NSInteger seasonNumberInteger = [seasonNumberString integerValue];
+            NSNumber *seasonNumber = [NSNumber numberWithInteger:seasonNumberInteger];
+
+            DDXMLElement *nameElement = [[element elementsForName:@"EpisodeName"] lastObject];
+            DDXMLNode *nameNode = [nameElement childAtIndex:0];
+            NSString *name = [nameNode stringValue];
+
+            [managedObjectContext performBlock:^{
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"season == %@ AND episode == %@", seasonNumber, episodeNumber];
+                NSSet *episodes = [[show episodes] filteredSetUsingPredicate:predicate];
+                for (Episode *episode in episodes) {
+                    [episode setName:name];
+                }
+            }];
+        }
+
+        [managedObjectContext performNestedSave];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"TheTVDBAPI updatedEpisodesForShow failure: %@", error);
+    }];
 }
 
 @end
