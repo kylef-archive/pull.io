@@ -96,6 +96,7 @@ typedef enum {
 
         case PIOMediaListFileType: {
             fetchRequest = [File fetchRequestInManagedObjectContext:[self managedObjectContext]];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"video == nil"]];
             [fetchRequest setSortDescriptors:@[
                 [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES],
             ]];
