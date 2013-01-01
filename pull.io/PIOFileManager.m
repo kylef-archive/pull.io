@@ -31,7 +31,7 @@
         [self setFilenameMatcher:filenameMatcher];
 
         NSFetchRequest *fetchRequest = [File fetchRequestInManagedObjectContext:managedObjectContext];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video = nil"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video == nil"];
         [fetchRequest setPredicate:predicate];
 
         [fetchRequest setSortDescriptors:@[
