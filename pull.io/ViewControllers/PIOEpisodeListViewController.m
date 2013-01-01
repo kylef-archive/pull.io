@@ -108,6 +108,14 @@
 
 #pragma mark -
 
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSArray *sections = [[self fetchedResultsController] sections];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+
+    NSString *title = [NSString stringWithFormat:@"Season %@", [sectionInfo name]];
+    return title;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
 
