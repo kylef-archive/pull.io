@@ -12,7 +12,7 @@
 @implementation Show (PIOExtension)
 
 + (Show*)findOrCreate:(NSString*)showName inManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", showName];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", showName];
     Show *show = (Show*)[Show objectForPredicate:predicate inManagedObjectContext:managedObjectContext];
 
     if (show == nil) {

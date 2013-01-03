@@ -134,9 +134,13 @@
                       if ([nodes count]) {
                           DDXMLElement *element = [nodes objectAtIndex:0];
 
+                          DDXMLElement *seriesNameElement = [[element elementsForName:@"SeriesName"] lastObject];
+                          DDXMLNode *seriesNameNode = [seriesNameElement childAtIndex:0];
+                          NSString *seriesName = [seriesNameNode stringValue];
+
                           DDXMLElement *overviewElement = [[element elementsForName:@"Overview"] lastObject];
                           DDXMLNode *overviewNode = [overviewElement childAtIndex:0];
-                          NSString *overview = [overviewNode stringValue];;
+                          NSString *overview = [overviewNode stringValue];
 
                           DDXMLElement *posterElement = [[element elementsForName:@"poster"] lastObject];
                           DDXMLNode *posterNode = [posterElement childAtIndex:0];
@@ -152,6 +156,7 @@
                           NSString *imdbID = [imdbIDNode stringValue];
 
                           [[show managedObjectContext] performWriteBlock:^{
+                              [show setName:seriesName];
                               [show setTvdb_id:seriesID];
                               [show setOverview:overview];
                               [show setPoster:posterURL];
