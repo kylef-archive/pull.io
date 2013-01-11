@@ -139,9 +139,12 @@
     if ([scheme isEqualToString:@"pullio"]) {
         NSString *host = [url host];
         if ([host isEqualToString:@"oauth-callback.put.io"]) {
-            NSString *path = [url path];
-            // We should really parse the code
-            NSString *code = [path substringFromIndex:7];
+            NSString *query = [url query];
+            NSString *code;
+
+            if ([query hasPrefix:@"code="]) {
+                code = [query substringFromIndex:5];
+            }
 
             [[self putIOAPIClient] authenticateUsingCode:code success:^(AFOAuthCredential *credential) {
                 NSLog(@"Authentication success: %@", credential);
