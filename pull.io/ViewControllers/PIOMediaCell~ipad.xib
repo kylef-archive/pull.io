@@ -39,7 +39,7 @@
 					<object class="IBUIImageView" id="607797690">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{14, 9}, {100, 147}}</string>
+						<string key="NSFrame">{{21, 7}, {163, 238}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="639575157"/>
@@ -55,7 +55,7 @@
 					<object class="IBUILabel" id="639575157">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{8, 160}, {100, 36}}</string>
+						<string key="NSFrame">{{0, 255}, {187, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -84,12 +84,12 @@
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
-						<double key="preferredMaxLayoutWidth">100</double>
+						<double key="preferredMaxLayoutWidth">187</double>
 					</object>
-					<object class="IBUIImageView" id="9949146">
+					<object class="IBUIImageView" id="857980760">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 7}, {116, 150}}</string>
+						<string key="NSFrame">{{0, 6}, {187, 242}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="607797690"/>
@@ -98,14 +98,14 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">case.png</string>
+							<string key="NSResourceName">case~ipad.png</string>
 						</object>
 					</object>
 				</array>
-				<string key="NSFrameSize">{116, 200}</string>
+				<string key="NSFrameSize">{187, 300}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="9949146"/>
+				<reference key="NSNextKeyView" ref="857980760"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -151,7 +151,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="607797690"/>
 							<reference ref="639575157"/>
-							<reference ref="9949146"/>
+							<reference ref="857980760"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -180,7 +180,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="9949146"/>
+						<reference key="object" ref="857980760"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -200,7 +200,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">144</int>
+			<int key="maxID">230</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -249,8 +249,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">case.png</string>
-			<string key="NS.object.0">{116, 150}</string>
+			<string key="NS.key.0">case~ipad.png</string>
+			<string key="NS.object.0">{187, 242}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">2078</string>
 	</data>

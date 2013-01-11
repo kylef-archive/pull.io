@@ -20,8 +20,11 @@
 #import "PIOMediaCell.h"
 
 #define kPIOMediaCell @"PIOMediaCell"
+#define kPIOMediaCellPad @"PIOMediaCell~ipad"
 #define kPIOMediaCellSize CGSizeMake(116, 200)
+#define kPIOMediaCellPadSize CGSizeMake(187, 300)
 #define kPIOMediaListSectionInset UIEdgeInsetsMake(30, 30, 30, 30)
+#define kPIOMediaListSectionPadInset UIEdgeInsetsMake(30, 50, 30, 50)
 
 @interface PIOMediaListViewController ()
 
@@ -36,8 +39,14 @@ typedef enum {
 
 - (id)initWithDataStore:(KFDataStore*)dataStore {
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
-    [collectionViewLayout setItemSize:kPIOMediaCellSize];
-    [collectionViewLayout setSectionInset:kPIOMediaListSectionInset];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [collectionViewLayout setItemSize:kPIOMediaCellPadSize];
+        [collectionViewLayout setSectionInset:kPIOMediaListSectionPadInset];
+    } else {
+        [collectionViewLayout setItemSize:kPIOMediaCellSize];
+        [collectionViewLayout setSectionInset:kPIOMediaListSectionInset];
+    }
 
     if (self = [super initWithDataStore:dataStore
                    collectionViewLayout:collectionViewLayout]) {
@@ -49,8 +58,17 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [[self collectionView] registerNib:[UINib nibWithNibName:kPIOMediaCell bundle:nil]
-            forCellWithReuseIdentifier:kPIOMediaCell];
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.118 green:0.133 blue:0.137 alpha:1]]; /*#1e2223*/
+
+    UINib *cellNib;
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        cellNib = [UINib nibWithNibName:kPIOMediaCellPad bundle:nil];
+    } else {
+        cellNib = [UINib nibWithNibName:kPIOMediaCell bundle:nil];
+    }
+
+    [[self collectionView] registerNib:cellNib            forCellWithReuseIdentifier:kPIOMediaCell];
 
     UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                   target:self
