@@ -38,7 +38,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="607797690">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{14, 9}, {100, 147}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -54,7 +54,7 @@
 					</object>
 					<object class="IBUILabel" id="639575157">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{8, 160}, {100, 36}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -86,7 +86,7 @@
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<double key="preferredMaxLayoutWidth">100</double>
 					</object>
-					<object class="IBUIImageView" id="9949146">
+					<object class="IBUIImageView" id="257586778">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 7}, {116, 150}}</string>
@@ -105,7 +105,7 @@
 				<string key="NSFrameSize">{116, 200}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="9949146"/>
+				<reference key="NSNextKeyView" ref="257586778"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -151,7 +151,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="607797690"/>
 							<reference ref="639575157"/>
-							<reference ref="9949146"/>
+							<reference ref="257586778"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -180,7 +180,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="9949146"/>
+						<reference key="object" ref="257586778"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
