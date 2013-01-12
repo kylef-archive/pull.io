@@ -58,7 +58,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [[self view] setBackgroundColor:[UIColor colorWithRed:0.118 green:0.133 blue:0.137 alpha:1]]; /*#1e2223*/
+    [[self collectionView] setBackgroundColor:[UIColor colorWithRed:0.118 green:0.133 blue:0.137 alpha:1]]; /*#1e2223*/
 
     UINib *cellNib;
 
