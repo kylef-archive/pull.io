@@ -62,7 +62,9 @@
             if (error) {
                 NSLog(@"PIOFileManager performFetch error: %@", error);
             } else {
-                for (File *file in [fetchedResultsController fetchedObjects]) {
+                NSArray *files = [fetchedResultsController fetchedObjects];
+
+                for (File *file in files) {
                     [self matchFile:file];
                 }
             }
@@ -103,14 +105,18 @@
         NSManagedObjectContext *managedObjectContext = [[self fetchedResultsController] managedObjectContext];
         
         PIOShowFilenameMatch *match = [[self filenameMatcher] matchFilename:[file filename]];
-        
+
         if (match) {
-            Show *show = [Show findOrCreate:[match seriesName]
+            NSString *seriesName = [match seriesName];
+            NSNumber *seasonNumber = [match seasonNumber];
+            NSNumber *episodeNumber = [[match episodeNumbers] lastObject];
+
+            Show *show = [Show findOrCreate:seriesName
                      inManagedObjectContext:managedObjectContext];
             
             Episode *episode = [Episode findOrShow:show
-                                            Season:[match seasonNumber]
-                                           Episode:[[match episodeNumbers] lastObject]
+                                            Season:seasonNumber
+                                           Episode:episodeNumber
                             inManagedObjectContext:managedObjectContext];
             
             [file setVideo:episode];
