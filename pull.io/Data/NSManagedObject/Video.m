@@ -2,8 +2,8 @@
 //  Video.m
 //  pull.io
 //
-//  Created by Kyle Fuller on 31/12/2012.
-//  Copyright (c) 2012 Kyle Fuller. All rights reserved.
+//  Created by Kyle Fuller on 13/01/2013.
+//  Copyright (c) 2013 Kyle Fuller. All rights reserved.
 //
 
 #import "Video.h"
@@ -12,8 +12,8 @@
 
 @implementation Video
 
-@dynamic watched;
 @dynamic playback_time;
+@dynamic watched;
 @dynamic file;
 
 @end
