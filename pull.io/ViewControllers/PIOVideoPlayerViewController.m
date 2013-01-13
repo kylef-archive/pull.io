@@ -19,7 +19,7 @@
 @implementation PIOVideoPlayerViewController
 
 - (id)initWithVideo:(Video*)video {
-    File *file = [video file];
+    File *file = (File*)[[video file] anyObject];
 
     if (self = [self initWithFile:file]) {
         _video = video;
