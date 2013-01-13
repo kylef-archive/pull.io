@@ -113,7 +113,11 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
         @"oauth_token": [self accessToken],
     };
 
-    [self getPath:@"files/list" parameters:parameters
+    NSString *path = @"files/list";
+
+    path = @"files/search/mp4%20type:video";
+
+    [self getPath:path parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
