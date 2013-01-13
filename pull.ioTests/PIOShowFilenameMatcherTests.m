@@ -61,7 +61,18 @@
 //    PIOAssertShow(@"Show-Name-S06E01-1080i", @"Show Name", @6, @[@1]);
     PIOAssertShow(@"Show.Name.S06E01.Other.WEB-DL", @"Show Name", @6, @[@1]);
     PIOAssertShow(@"Show.Name.S06E01 Some-Stuff Here", @"Show Name", @6, @[@1]);
-    
+}
+
+- (void)testFOVShow {
+    PIOAssertShow(@"Show_Name.1x02.Source_Quality_Etc-Group", @"Show Name", @1, @[@2]);
+    PIOAssertShow(@"Show Name 1x02", @"Show Name", @1, @[@2]);
+    PIOAssertShow(@"Show Name 1x02 x264 Test", @"Show Name", @1, @[@2]);
+    PIOAssertShow(@"Show Name - 1x02 - My Ep Name", @"Show Name", @1, @[@2]);
+
+//    PIOAssertShow(@"Show_Name.1x02x03x04.Source_Quality_Etc-Group", @"Show Name", @1, @[@2, @3, @4]);
+//    PIOAssertShow(@"Show Name - 1x02-03-04 - My Ep Name", @"Show Name", @1, @[@2, @3, @4]);
+    PIOAssertShow(@"Show Name 1x02 x264 Test", @"Show Name", @1, @[@2]);
+    PIOAssertShow(@"Show Name - 1x02 - My Ep Name", @"Show Name", @1, @[@2]);
 }
 
 @end

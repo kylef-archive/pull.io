@@ -16,12 +16,55 @@
 
 @end
 
+@interface PIOShowFilenameMatcher ()
+
+@property (nonatomic, strong) NSRegularExpression *standardShowExpression;
+@property (nonatomic, strong) NSRegularExpression *fovShowExpression;
+
+@end
+
 @implementation PIOShowFilenameMatcher
 
 #define kPIOStandardRegex @"^(?:(.+)[. _-]+)"   \
                           @"s(?:(\\d+)[. _-]*)" \
                           @"e(?:(\\d+)[. _-]*)" \
                           @"(.*)$"
+
+#define kPIOFOVRegex @"^(?:(.+)[. _-]+)"   \
+                     @"(?:(\\d+)[. _-]*)x" \
+                     @"(?:(\\d+)[. _-]*)" \
+                     @"(.*)$"
+
+
+- (NSRegularExpression *)standardShowExpression {
+    if (_standardShowExpression == nil) {
+        NSError *error;
+        _standardShowExpression = [NSRegularExpression regularExpressionWithPattern:kPIOStandardRegex
+                                                                                    options:NSRegularExpressionCaseInsensitive
+                                                                                      error:&error];
+
+        if (_standardShowExpression == nil) {
+            NSLog(@"Regex failed %@", error);
+        }
+    }
+
+    return _standardShowExpression;
+}
+
+- (NSRegularExpression *)fovShowExpression {
+    if (_fovShowExpression == nil) {
+        NSError *error;
+        _fovShowExpression = [NSRegularExpression regularExpressionWithPattern:kPIOFOVRegex
+                                                                            options:NSRegularExpressionCaseInsensitive
+                                                                              error:&error];
+        
+        if (_standardShowExpression == nil) {
+            NSLog(@"Regex failed %@", error);
+        }
+    }
+    
+    return _fovShowExpression;
+}
 
 - (NSString*)cleanSeriesName:(NSString*)seriesName {
     /* Cleans up series name by removing any . and _
@@ -77,37 +120,71 @@
     return seriesName;
 }
 
-- (PIOShowFilenameMatch*)matchFilename:(NSString*)filename {
-    NSError *error;
-    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:kPIOStandardRegex
-                                                                                options:NSRegularExpressionCaseInsensitive
-                                                                                  error:&error];
-    if (expression == nil) {
-        NSLog(@"Regex failed %@", error);
-    }
+- (PIOShowFilenameMatch *)standardFilenameMatch:(NSString*)filename {
+    NSRegularExpression *expression = [self standardShowExpression];
 
     NSTextCheckingResult *match = [expression firstMatchInString:filename
                                                          options:0
                                                            range:NSMakeRange(0, [filename length])];
 
-    NSRange shownameRange = [match rangeAtIndex:1];
-    NSRange seasonRange = [match rangeAtIndex:2];
-    NSRange episodeRange = [match rangeAtIndex:3];
+    PIOShowFilenameMatch *result;
 
-    PIOShowFilenameMatch *result = [PIOShowFilenameMatch new];
+    if (match) {
+        NSRange shownameRange = [match rangeAtIndex:1];
+        NSRange seasonRange = [match rangeAtIndex:2];
+        NSRange episodeRange = [match rangeAtIndex:3];
 
-    NSString *seriesName = [filename substringWithRange:shownameRange];
-    seriesName = [self cleanSeriesName:seriesName];
-    [result setSeriesName:seriesName];
+        result = [PIOShowFilenameMatch new];
 
-    NSString *season = [filename substringWithRange:seasonRange];
-    [result setSeasonNumber:[NSNumber numberWithInteger:[season integerValue]]];
+        NSString *seriesName = [filename substringWithRange:shownameRange];
+        seriesName = [self cleanSeriesName:seriesName];
+        [result setSeriesName:seriesName];
 
-    NSString *episode = [filename substringWithRange:episodeRange];
-    [result setEpisodeNumbers:@[[NSNumber numberWithInteger:[episode integerValue]]]];
+        NSString *season = [filename substringWithRange:seasonRange];
+        [result setSeasonNumber:[NSNumber numberWithInteger:[season integerValue]]];
 
-    if ([seriesName length] == 0) {
-        result = nil;
+        NSString *episode = [filename substringWithRange:episodeRange];
+        [result setEpisodeNumbers:@[[NSNumber numberWithInteger:[episode integerValue]]]];
+    }
+
+    return result;
+}
+
+- (PIOShowFilenameMatch *)fovFilenameMatch:(NSString*)filename {
+    NSRegularExpression *expression = [self fovShowExpression];
+
+    NSTextCheckingResult *match = [expression firstMatchInString:filename
+                                                         options:0
+                                                           range:NSMakeRange(0, [filename length])];
+
+    PIOShowFilenameMatch *result;
+
+    if (match) {
+        NSRange shownameRange = [match rangeAtIndex:1];
+        NSRange seasonRange = [match rangeAtIndex:2];
+        NSRange episodeRange = [match rangeAtIndex:3];
+
+        result = [PIOShowFilenameMatch new];
+
+        NSString *seriesName = [filename substringWithRange:shownameRange];
+        seriesName = [self cleanSeriesName:seriesName];
+        [result setSeriesName:seriesName];
+
+        NSString *season = [filename substringWithRange:seasonRange];
+        [result setSeasonNumber:[NSNumber numberWithInteger:[season integerValue]]];
+
+        NSString *episode = [filename substringWithRange:episodeRange];
+        [result setEpisodeNumbers:@[[NSNumber numberWithInteger:[episode integerValue]]]];
+    }
+    
+    return result;
+}
+
+- (PIOShowFilenameMatch*)matchFilename:(NSString*)filename {
+    PIOShowFilenameMatch *result = [self standardFilenameMatch:filename];
+
+    if (result == nil) {
+        result = [self fovFilenameMatch:filename];
     }
 
     return result;
