@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) NSRegularExpression *standardShowExpression;
 @property (nonatomic, strong) NSRegularExpression *fovShowExpression;
+@property (nonatomic, strong) NSRegularExpression *sceneDateFormatExpression;
 
 @end
 
@@ -35,6 +36,11 @@
                      @"(?:(\\d+)[. _-]*)" \
                      @"(.*)$"
 
+#define kPIOSceneDateFormatRegex @"^(?:(.+)[. _-]+)" \
+                                 @"(?:(\\d{4})[. _-]*)" \
+                                 @"(?:(\\d{2})[. _-]*)" \
+                                 @"(?:(\\d{2})[. _-]*)" \
+                                 @"(.*)$"
 
 - (NSRegularExpression *)standardShowExpression {
     if (_standardShowExpression == nil) {
@@ -64,6 +70,21 @@
     }
     
     return _fovShowExpression;
+}
+
+- (NSRegularExpression *)sceneDateFormatExpression {
+    if (_sceneDateFormatExpression == nil) {
+        NSError *error;
+        _sceneDateFormatExpression = [NSRegularExpression regularExpressionWithPattern:kPIOSceneDateFormatRegex
+                                                                       options:NSRegularExpressionCaseInsensitive
+                                                                         error:&error];
+
+        if (_sceneDateFormatExpression == nil) {
+            NSLog(@"Regex failed %@", error);
+        }
+    }
+
+    return _sceneDateFormatExpression;
 }
 
 - (NSString*)cleanSeriesName:(NSString*)seriesName {
@@ -180,11 +201,50 @@
     return result;
 }
 
+- (PIOShowFilenameMatch *)sceneDateFormatFilenameMatch:(NSString*)filename {
+    NSRegularExpression *expression = [self sceneDateFormatExpression];
+
+    NSTextCheckingResult *match = [expression firstMatchInString:filename
+                                                         options:0
+                                                           range:NSMakeRange(0, [filename length])];
+
+    PIOShowFilenameMatch *result;
+
+    if (match) {
+        NSRange shownameRange = [match rangeAtIndex:1];
+        NSRange yearRange = [match rangeAtIndex:2];
+        NSRange monthRange = [match rangeAtIndex:3];
+        NSRange dayRange = [match rangeAtIndex:4];
+
+        result = [PIOShowFilenameMatch new];
+
+        NSString *seriesName = [filename substringWithRange:shownameRange];
+        seriesName = [self cleanSeriesName:seriesName];
+        [result setSeriesName:seriesName];
+
+        NSString *year = [filename substringWithRange:yearRange];
+        NSString *month = [filename substringWithRange:monthRange];
+        NSString *day = [filename substringWithRange:dayRange];
+        NSString *airedDate = [NSString stringWithFormat:@"%@-%@-%@", year, month, day];
+
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *aired = [formatter dateFromString:airedDate];
+        [result setAired:aired];
+    }
+    
+    return result;
+}
+
 - (PIOShowFilenameMatch*)matchFilename:(NSString*)filename {
     PIOShowFilenameMatch *result = [self standardFilenameMatch:filename];
 
     if (result == nil) {
         result = [self fovFilenameMatch:filename];
+
+        if (result == nil) {
+            result = [self sceneDateFormatFilenameMatch:filename];
+        }
     }
 
     return result;

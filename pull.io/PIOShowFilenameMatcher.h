@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) NSArray *episodeNumbers;
 
+@property (nonatomic, strong) NSDate *aired;
+
 @end
 
 @interface PIOShowFilenameMatcher : NSObject

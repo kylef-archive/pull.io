@@ -117,6 +117,7 @@
             Episode *episode = [Episode findOrShow:show
                                             Season:seasonNumber
                                            Episode:episodeNumber
+                                             aired:[match aired]
                             inManagedObjectContext:managedObjectContext];
             
             [file setVideo:episode];

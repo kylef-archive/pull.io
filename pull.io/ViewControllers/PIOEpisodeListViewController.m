@@ -67,6 +67,7 @@
     [fetchRequest setSortDescriptors:@[
         [NSSortDescriptor sortDescriptorWithKey:@"season" ascending:YES],
         [NSSortDescriptor sortDescriptorWithKey:@"episode" ascending:YES],
+        [NSSortDescriptor sortDescriptorWithKey:@"aired" ascending:YES],
     ]];
 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -90,8 +91,13 @@
 
     if (title) {
         title = [NSString stringWithFormat:@"%@ %@", [episode episode], title];
-    } else {
+    } else if ([episode episode]) {
         title = [NSString stringWithFormat:@"Episode %@", [episode episode]];
+    } else if ([episode aired]) {
+        NSDate *aired = [episode aired];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        title = [formatter stringFromDate:aired];
     }
 
     [[cell textLabel] setText:title];

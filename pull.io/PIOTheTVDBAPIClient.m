@@ -181,6 +181,9 @@
         NSArray *nodes = [XMLDocument nodesForXPath:@"//Data/Episode" error:nil];
         NSManagedObjectContext *managedObjectContext = [show managedObjectContext];
 
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+
         for (DDXMLElement *element in nodes) {
             DDXMLElement *episodeNumberElement = [[element elementsForName:@"EpisodeNumber"] lastObject];
             DDXMLNode *episodeNumberNode = [episodeNumberElement childAtIndex:0];
@@ -194,15 +197,23 @@
             NSInteger seasonNumberInteger = [seasonNumberString integerValue];
             NSNumber *seasonNumber = [NSNumber numberWithInteger:seasonNumberInteger];
 
+            DDXMLElement *firstAiredElement = [[element elementsForName:@"FirstAired"] lastObject];
+            DDXMLNode *firstAiredNode = [firstAiredElement childAtIndex:0];
+            NSString *firstAiredString = [firstAiredNode stringValue];
+            NSDate *firstAired = [dateFormatter dateFromString:firstAiredString];
+
             DDXMLElement *nameElement = [[element elementsForName:@"EpisodeName"] lastObject];
             DDXMLNode *nameNode = [nameElement childAtIndex:0];
             NSString *name = [nameNode stringValue];
 
             [managedObjectContext performBlock:^{
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"season == %@ AND episode == %@", seasonNumber, episodeNumber];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(season == %@ AND episode == %@) OR (aired == %@)", seasonNumber, episodeNumber, firstAired];
                 NSSet *episodes = [[show episodes] filteredSetUsingPredicate:predicate];
                 for (Episode *episode in episodes) {
                     [episode setName:name];
+                    [episode setSeason:seasonNumber];
+                    [episode setEpisode:episodeNumber];
+                    [episode setAired:firstAired];
                 }
             }];
         }

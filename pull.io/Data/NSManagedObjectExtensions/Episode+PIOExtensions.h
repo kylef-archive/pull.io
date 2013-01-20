@@ -15,6 +15,7 @@
 + (Episode*)findOrShow:(Show*)show
                 Season:(NSNumber*)seasonNumber
                Episode:(NSNumber*)episodeNumber
+                 aired:(NSDate*)aired
 inManagedObjectContext:(NSManagedObjectContext*)managedObjectContext;
 
 @end

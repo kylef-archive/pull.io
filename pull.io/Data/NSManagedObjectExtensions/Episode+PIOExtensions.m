@@ -14,16 +14,36 @@
 + (Episode*)findOrShow:(Show*)show
                 Season:(NSNumber*)seasonNumber
                Episode:(NSNumber*)episodeNumber
+                 aired:(NSDate*)aired
 inManagedObjectContext:(NSManagedObjectContext*)managedObjectContext
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND episode == %@ AND season == %@", show, episodeNumber, seasonNumber];;
-    Episode *episode = (Episode*)[Episode objectForPredicate:predicate inManagedObjectContext:managedObjectContext];
-    
+    Episode *episode;
+
+    if (seasonNumber && episodeNumber) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND episode == %@ AND season == %@", show, episodeNumber, seasonNumber];
+        episode = (Episode*)[Episode objectForPredicate:predicate inManagedObjectContext:managedObjectContext];
+    }
+
+    if (episode == nil && aired) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND aired == %@", show, aired];
+        episode = (Episode*)[Episode objectForPredicate:predicate inManagedObjectContext:managedObjectContext];
+    }
+
     if (episode == nil) {
         episode = (Episode*)[Episode createInContext:managedObjectContext];
-        [episode setShow:(NSManagedObject*)show];
-        [episode setSeason:seasonNumber];
-        [episode setEpisode:episodeNumber];
+        [episode setShow:show];
+
+        if (seasonNumber) {
+            [episode setSeason:seasonNumber];
+        }
+
+        if (episodeNumber) {
+            [episode setEpisode:episodeNumber];
+        }
+
+        if (aired) {
+            [episode setAired:aired];
+        }
     }
     
     return episode;

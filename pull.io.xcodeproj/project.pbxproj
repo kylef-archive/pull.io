@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		71A9872C9AE040CA8F744608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32D63AAAE4BFC886211ED /* libPods.a */; };
+		77019D4316A246C600DC5B7C /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 77019D4216A246C600DC5B7C /* File.m */; };
+		77019D4616A248B000DC5B7C /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 77019D4516A248B000DC5B7C /* Video.m */; };
 		770205261683BD5F00FC828F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 770205231683BD5F00FC828F /* Localizable.strings */; };
 		770F49A2167D4A41008CADCD /* PIOShowFilenameMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */; };
 		770F49A5167D52BA008CADCD /* PIOShowFilenameMatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 770F49A4167D52BA008CADCD /* PIOShowFilenameMatcherTests.m */; };
@@ -48,12 +50,10 @@
 		77E54AF51691292B000654D5 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF11691292B000654D5 /* Icon~ipad.png */; };
 		77E54AF61691292B000654D5 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF21691292B000654D5 /* Icon~ipad@2x.png */; };
 		77E54B0316912FD3000654D5 /* PIOVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B0216912FD3000654D5 /* PIOVideoPlayerViewController.m */; };
-		77E54B09169134F8000654D5 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B08169134F8000654D5 /* File.m */; };
 		77E54B0C169134FC000654D5 /* PutIOFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B0B169134FC000654D5 /* PutIOFile.m */; };
-		77E54B0F169134FC000654D5 /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B0E169134FC000654D5 /* Episode.m */; };
 		77E54B12169134FC000654D5 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B11169134FC000654D5 /* Movie.m */; };
 		77E54B15169134FC000654D5 /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B14169134FC000654D5 /* Show.m */; };
-		77E54B18169134FC000654D5 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E54B17169134FC000654D5 /* Video.m */; };
+		77E696AD16AB2E53009576BA /* Episode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E696AC16AB2E53009576BA /* Episode.m */; };
 		77FD382B166C1EAA00152690 /* PIOTraktAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD382A166C1EAA00152690 /* PIOTraktAPIClient.m */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +69,10 @@
 
 /* Begin PBXFileReference section */
 		5BA32D63AAAE4BFC886211ED /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		77019D4116A246C600DC5B7C /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Data/NSManagedObject/File.h; sourceTree = "<group>"; };
+		77019D4216A246C600DC5B7C /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Data/NSManagedObject/File.m; sourceTree = "<group>"; };
+		77019D4416A248B000DC5B7C /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Video.h; path = Data/NSManagedObject/Video.h; sourceTree = "<group>"; };
+		77019D4516A248B000DC5B7C /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Video.m; path = Data/NSManagedObject/Video.m; sourceTree = "<group>"; };
 		770205241683BD5F00FC828F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		770F49A0167D4A41008CADCD /* PIOShowFilenameMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIOShowFilenameMatcher.h; sourceTree = "<group>"; };
 		770F49A1167D4A41008CADCD /* PIOShowFilenameMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIOShowFilenameMatcher.m; sourceTree = "<group>"; };
@@ -125,18 +129,14 @@
 		77E54AF21691292B000654D5 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad@2x.png"; sourceTree = "<group>"; };
 		77E54B0116912FD3000654D5 /* PIOVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOVideoPlayerViewController.h; path = ViewControllers/PIOVideoPlayerViewController.h; sourceTree = "<group>"; };
 		77E54B0216912FD3000654D5 /* PIOVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOVideoPlayerViewController.m; path = ViewControllers/PIOVideoPlayerViewController.m; sourceTree = "<group>"; };
-		77E54B07169134F8000654D5 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Data/NSManagedObject/File.h; sourceTree = "<group>"; };
-		77E54B08169134F8000654D5 /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Data/NSManagedObject/File.m; sourceTree = "<group>"; };
 		77E54B0A169134FC000654D5 /* PutIOFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutIOFile.h; path = Data/NSManagedObject/PutIOFile.h; sourceTree = "<group>"; };
 		77E54B0B169134FC000654D5 /* PutIOFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutIOFile.m; path = Data/NSManagedObject/PutIOFile.m; sourceTree = "<group>"; };
-		77E54B0D169134FC000654D5 /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Episode.h; path = Data/NSManagedObject/Episode.h; sourceTree = "<group>"; };
-		77E54B0E169134FC000654D5 /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Episode.m; path = Data/NSManagedObject/Episode.m; sourceTree = "<group>"; };
 		77E54B10169134FC000654D5 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Movie.h; path = Data/NSManagedObject/Movie.h; sourceTree = "<group>"; };
 		77E54B11169134FC000654D5 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Movie.m; path = Data/NSManagedObject/Movie.m; sourceTree = "<group>"; };
 		77E54B13169134FC000654D5 /* Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Show.h; path = Data/NSManagedObject/Show.h; sourceTree = "<group>"; };
 		77E54B14169134FC000654D5 /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Show.m; path = Data/NSManagedObject/Show.m; sourceTree = "<group>"; };
-		77E54B16169134FC000654D5 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Video.h; path = Data/NSManagedObject/Video.h; sourceTree = "<group>"; };
-		77E54B17169134FC000654D5 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Video.m; path = Data/NSManagedObject/Video.m; sourceTree = "<group>"; };
+		77E696AB16AB2E53009576BA /* Episode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Episode.h; path = Data/NSManagedObject/Episode.h; sourceTree = "<group>"; };
+		77E696AC16AB2E53009576BA /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Episode.m; path = Data/NSManagedObject/Episode.m; sourceTree = "<group>"; };
 		77FD3829166C1EAA00152690 /* PIOTraktAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOTraktAPIClient.h; path = API/trakt/PIOTraktAPIClient.h; sourceTree = "<group>"; };
 		77FD382A166C1EAA00152690 /* PIOTraktAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOTraktAPIClient.m; path = API/trakt/PIOTraktAPIClient.m; sourceTree = "<group>"; };
 		A04DB9BE92E745B682DE0801 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -171,18 +171,18 @@
 		770F499F167D45FF008CADCD /* NSManagedObject */ = {
 			isa = PBXGroup;
 			children = (
-				77E54B16169134FC000654D5 /* Video.h */,
-				77E54B17169134FC000654D5 /* Video.m */,
+				77E696AB16AB2E53009576BA /* Episode.h */,
+				77E696AC16AB2E53009576BA /* Episode.m */,
+				77019D4416A248B000DC5B7C /* Video.h */,
+				77019D4516A248B000DC5B7C /* Video.m */,
+				77019D4116A246C600DC5B7C /* File.h */,
+				77019D4216A246C600DC5B7C /* File.m */,
 				77E54B13169134FC000654D5 /* Show.h */,
 				77E54B14169134FC000654D5 /* Show.m */,
 				77E54B10169134FC000654D5 /* Movie.h */,
 				77E54B11169134FC000654D5 /* Movie.m */,
-				77E54B0D169134FC000654D5 /* Episode.h */,
-				77E54B0E169134FC000654D5 /* Episode.m */,
 				77E54B0A169134FC000654D5 /* PutIOFile.h */,
 				77E54B0B169134FC000654D5 /* PutIOFile.m */,
-				77E54B07169134F8000654D5 /* File.h */,
-				77E54B08169134F8000654D5 /* File.m */,
 			);
 			name = NSManagedObject;
 			sourceTree = "<group>";
@@ -522,7 +522,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT_RELEASE_VERSION=$(git describe --tags --dirty --always)\nCOMMITS=$(git rev-list HEAD | wc -l)\nCOMMITS=$(($COMMITS))\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleShortVersionString\" \"${GIT_RELEASE_VERSION#*v}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"";
+			shellScript = "GIT_RELEASE_VERSION=$(git describe --tags --always)\nCOMMITS=$(git rev-list HEAD | wc -l)\nCOMMITS=$(($COMMITS))\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleShortVersionString\" \"${GIT_RELEASE_VERSION#*v}\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"${COMMITS}\"";
 		};
 		77A80B69166988C3003CD050 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -572,13 +572,13 @@
 				77A73EC4167FA72E00FA7680 /* PIOFileManager.m in Sources */,
 				7776BE1E1682747600A5769F /* PIOMediaCell.m in Sources */,
 				77E54B0316912FD3000654D5 /* PIOVideoPlayerViewController.m in Sources */,
-				77E54B09169134F8000654D5 /* File.m in Sources */,
 				77E54B0C169134FC000654D5 /* PutIOFile.m in Sources */,
-				77E54B0F169134FC000654D5 /* Episode.m in Sources */,
 				77E54B12169134FC000654D5 /* Movie.m in Sources */,
 				77E54B15169134FC000654D5 /* Show.m in Sources */,
-				77E54B18169134FC000654D5 /* Video.m in Sources */,
 				77BF8C9B16924C0B0072069D /* NSString+PIOExtensions.m in Sources */,
+				77019D4316A246C600DC5B7C /* File.m in Sources */,
+				77019D4616A248B000DC5B7C /* Video.m in Sources */,
+				77E696AD16AB2E53009576BA /* Episode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,7 +750,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kyle Fuller";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mentally Friendly LDN Ltd";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -762,7 +762,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "481B1219-D77C-4478-9F3A-2153D6D72EB9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D8D95BF3-879D-4513-8368-0EC07315D9E5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
