@@ -6,17 +6,16 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import "NSManagedObject+KFData.h"
 #import "Show+PIOExtension.h"
 
 @implementation Show (PIOExtension)
 
 + (Show*)findOrCreate:(NSString*)showName inManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", showName];
-    Show *show = (Show*)[Show objectForPredicate:predicate inManagedObjectContext:managedObjectContext];
+    Show *show = [Show findSingleWithPredicate:predicate inManagedObjectContext:managedObjectContext];
 
     if (show == nil) {
-        show = (Show*)[Show createInContext:managedObjectContext];
+        show = [Show createInManagedObjectContext:managedObjectContext];
         [show setName:showName];
     }
 

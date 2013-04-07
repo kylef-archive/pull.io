@@ -10,6 +10,6 @@
 
 @interface PIOMediaListViewController : KFDataCollectionViewController
 
-- (id)initWithDataStore:(KFDataStore*)dataStore;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end

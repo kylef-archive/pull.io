@@ -134,11 +134,10 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
                     NSString *filename = [file objectForKey:@"name"];
 
                     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", idx];
-                    PutIOFile *managedFile = (PutIOFile*)[PutIOFile objectForPredicate:predicate
-                                                    inManagedObjectContext:managedObjectContext];
+                    PutIOFile *managedFile = [PutIOFile findSingleWithPredicate:predicate inManagedObjectContext:managedObjectContext];
 
                     if (managedFile == nil) {
-                        managedFile = (PutIOFile*)[PutIOFile createInContext:managedObjectContext];
+                        managedFile = [PutIOFile createInManagedObjectContext:managedObjectContext];
                         [managedFile setId:idx];
                         [managedFile setFilename:filename];
                     }

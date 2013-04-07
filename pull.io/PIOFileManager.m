@@ -30,7 +30,7 @@
         PIOShowFilenameMatcher *filenameMatcher = [[PIOShowFilenameMatcher alloc] init];
         [self setFilenameMatcher:filenameMatcher];
 
-        NSFetchRequest *fetchRequest = [File fetchRequestInManagedObjectContext:managedObjectContext];
+        NSFetchRequest *fetchRequest = [File requestAllInManagedObjectContext:managedObjectContext];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video == nil"];
         [fetchRequest setPredicate:predicate];
 
@@ -122,7 +122,7 @@
             
             [file setVideo:episode];
             
-            [managedObjectContext nestedSave];
+            [managedObjectContext nestedSave:nil];
         }
     }
 }

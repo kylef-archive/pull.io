@@ -59,7 +59,7 @@
         });
     }];
 
-    NSFetchRequest *fetchRequest = [Episode fetchRequestInManagedObjectContext:[self managedObjectContext]];
+    NSFetchRequest *fetchRequest = [Episode requestAllInManagedObjectContext:[self managedObjectContext]];
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@", show];
     [fetchRequest setPredicate:predicate];

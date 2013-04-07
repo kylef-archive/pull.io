@@ -39,7 +39,7 @@
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
     if (self = [self init]) {
-        NSFetchRequest *fetchRequest = [Show fetchRequestInManagedObjectContext:managedObjectContext];
+        NSFetchRequest *fetchRequest = [Show requestAllInManagedObjectContext:managedObjectContext];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tvdb_id == 0"];
         [fetchRequest setPredicate:predicate];
 

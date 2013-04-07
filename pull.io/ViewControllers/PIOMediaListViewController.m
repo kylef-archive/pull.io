@@ -37,7 +37,7 @@ typedef enum {
 
 @implementation PIOMediaListViewController
 
-- (id)initWithDataStore:(KFDataStore*)dataStore {
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -48,8 +48,8 @@ typedef enum {
         [collectionViewLayout setSectionInset:kPIOMediaListSectionInset];
     }
 
-    if (self = [super initWithDataStore:dataStore
-                   collectionViewLayout:collectionViewLayout]) {
+    if (self = [super initWithManagedObjectContext:managedObjectContext
+                              collectionViewLayout:collectionViewLayout]) {
     }
 
     return self;
@@ -104,7 +104,7 @@ typedef enum {
 
     switch (listType) {
         case PIOMediaListShowType: {
-            fetchRequest = [Show fetchRequestInManagedObjectContext:[self managedObjectContext]];
+            fetchRequest = [Show requestAllInManagedObjectContext:[self managedObjectContext]];
             [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"episodes.@count > 0"]];
             [fetchRequest setSortDescriptors:@[
                 [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
@@ -113,7 +113,7 @@ typedef enum {
         }
 
         case PIOMediaListFileType: {
-            fetchRequest = [File fetchRequestInManagedObjectContext:[self managedObjectContext]];
+            fetchRequest = [File requestAllInManagedObjectContext:[self managedObjectContext]];
             [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"video == nil"]];
             [fetchRequest setSortDescriptors:@[
                 [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES],
