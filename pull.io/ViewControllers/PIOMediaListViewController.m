@@ -68,7 +68,8 @@ typedef enum {
         cellNib = [UINib nibWithNibName:kPIOMediaCell bundle:nil];
     }
 
-    [[self collectionView] registerNib:cellNib            forCellWithReuseIdentifier:kPIOMediaCell];
+    [[self collectionView] registerNib:cellNib
+            forCellWithReuseIdentifier:kPIOMediaCell];
 
     UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                   target:self
@@ -160,7 +161,11 @@ typedef enum {
         [managedObjectContext setParentContext:[self managedObjectContext]];
         PIOEpisodeListViewController *episodesListViewController = [[PIOEpisodeListViewController alloc] initWithManagedObjectContext:managedObjectContext];
         [episodesListViewController setShow:[managedObject objectID]];
-        [[self navigationController] pushViewController:episodesListViewController animated:YES];
+
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:episodesListViewController];
+        [navigationController setModalPresentationStyle:UIModalPresentationFormSheet];
+
+        [self presentViewController:navigationController animated:YES completion:nil];
     } else if ([managedObject isKindOfClass:[File class]]) {
         File *file = (File*)managedObject;
 

@@ -27,6 +27,19 @@
 
 @implementation PIOEpisodeListViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                   target:self
+                                                                                   action:@selector(close)];
+    [[self navigationItem] setRightBarButtonItem:barButtonItem];
+}
+
+- (void)close {
+    [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)setShow:(NSManagedObjectID*)showID {
     Show *show = (Show*)[[self managedObjectContext] objectWithID:showID];
 
