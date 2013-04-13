@@ -83,7 +83,7 @@
 
         if (([[video watched] boolValue] == NO) &&
             duration &&
-            (currentPlaybackTime >= duration))
+            (currentPlaybackTime >= (duration - 60.0)))
         {
             [video setWatched:@YES];
         }
