@@ -207,7 +207,7 @@
             NSString *name = [nameNode stringValue];
 
             [managedObjectContext performBlock:^{
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(season == %@ AND episode == %@) OR (aired == %@)", seasonNumber, episodeNumber, firstAired];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(season == %@ AND episode == %@) OR (aired != nil AND aired == %@)", seasonNumber, episodeNumber, firstAired];
                 NSSet *episodes = [[show episodes] filteredSetUsingPredicate:predicate];
                 for (Episode *episode in episodes) {
                     [episode setName:name];
