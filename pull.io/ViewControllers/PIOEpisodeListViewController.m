@@ -74,7 +74,7 @@
 
     NSFetchRequest *fetchRequest = [Episode requestAllInManagedObjectContext:[self managedObjectContext]];
 
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@", show];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND (file.@count > 0)", show];
     [fetchRequest setPredicate:predicate];
 
     [fetchRequest setSortDescriptors:@[

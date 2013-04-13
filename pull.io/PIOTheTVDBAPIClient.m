@@ -209,11 +209,21 @@
             [managedObjectContext performBlock:^{
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(season == %@ AND episode == %@) OR (aired != nil AND aired == %@)", seasonNumber, episodeNumber, firstAired];
                 NSSet *episodes = [[show episodes] filteredSetUsingPredicate:predicate];
+
                 for (Episode *episode in episodes) {
                     [episode setName:name];
                     [episode setSeason:seasonNumber];
                     [episode setEpisode:episodeNumber];
                     [episode setAired:firstAired];
+                }
+
+                if ([episodes count] == 0) {
+                    Episode *episode = [Episode createInManagedObjectContext:managedObjectContext];
+                    [episode setName:name];
+                    [episode setSeason:seasonNumber];
+                    [episode setEpisode:episodeNumber];
+                    [episode setAired:firstAired];
+                    [episode setShow:show];
                 }
             }];
         }
