@@ -206,7 +206,7 @@
             DDXMLNode *nameNode = [nameElement childAtIndex:0];
             NSString *name = [nameNode stringValue];
 
-            [managedObjectContext performBlock:^{
+            [managedObjectContext performWriteBlock:^{
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(season == %@ AND episode == %@) OR (aired != nil AND aired == %@)", seasonNumber, episodeNumber, firstAired];
                 NSSet *episodes = [[show episodes] filteredSetUsingPredicate:predicate];
 
@@ -227,8 +227,6 @@
                 }
             }];
         }
-
-        [managedObjectContext performNestedSave];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"TheTVDBAPI updatedEpisodesForShow failure: %@", error);
     }];
