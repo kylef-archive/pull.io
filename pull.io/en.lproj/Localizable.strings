@@ -11,3 +11,5 @@
 
 "PLAY_TIMESTAMP" = "Resume from %@";
 "PLAY_FROM_START" = "Play from beginning";
+
+"EPISODE_LIST_DELETE_EPISODE_TITLE" = "Delete";

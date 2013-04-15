@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import "NSManagedObject+KFData.h"
 #import "NSString+PIOExtensions.h"
 
 #import "PIOAppDelegate.h"
@@ -18,6 +17,7 @@
 #import "Show+PIOExtension.h"
 #import "Episode+PIOExtensions.h"
 #import "File.h"
+#import "PutIOFile.h"
 
 @interface PIOEpisodeListViewController () <UIActionSheetDelegate>
 
@@ -158,6 +158,38 @@
     } else {
         [self playEpisode:episode resumeFromPreviousPlayback:NO];
     }
+}
+
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+
+        [[self managedObjectContext] performWriteBlock:^{
+            NSSet *files = [[episode file] copy];
+
+            for (File *file in files) {
+                if ([file isKindOfClass:[PutIOFile class]]) {
+                    [[PIOAppDelegate sharedPutIOAPIClient] deleteFile:(PutIOFile *)file];
+                }
+
+                [[self managedObjectContext] deleteObject:file];
+            }
+
+            NSFetchRequest *fetchRequest = [[self fetchedResultsController] fetchRequest];
+            NSArray *episodes = [Episode executeFetchRequest:fetchRequest inManagedObjectContext:[self managedObjectContext]];
+
+            if ([episodes count] == 0) {
+                [self close];
+            }
+        }];
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NSLocalizedString(@"EPISODE_LIST_DELETE_EPISODE_TITLE", nil);
 }
 
 - (void)playEpisode:(Episode*)episode resumeFromPreviousPlayback:(BOOL)resume {

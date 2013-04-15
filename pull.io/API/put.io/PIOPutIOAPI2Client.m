@@ -156,4 +156,20 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
     }];
 }
 
+- (void)deleteFile:(PutIOFile *)file {
+    NSNumber *fileID = [file valueForKey:@"id"];
+    NSParameterAssert(fileID);
+
+    NSDictionary *parameters = @{
+         @"oauth_token": [self accessToken],
+         @"file_ids": fileID
+     };
+
+    [self postPath:@"files/delete" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        ;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        ;
+    }];
+}
+
 @end

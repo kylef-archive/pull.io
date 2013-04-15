@@ -10,6 +10,7 @@
 #import "AFOAuth2Client.h"
 
 @class NSManagedObjectContext;
+@class PutIOFile;
 
 @interface PIOPutIOAPI2Client : AFOAuth2Client
 
@@ -26,5 +27,6 @@
 - (NSURL*)URLForFileID:(NSString*)fileID;
 
 - (void)getFiles;
+- (void)deleteFile:(PutIOFile *)file;
 
 @end
