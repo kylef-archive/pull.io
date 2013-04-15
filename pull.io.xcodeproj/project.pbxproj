@@ -45,6 +45,7 @@
 		77A8607816A0C704007185E9 /* case~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A8607416A0C704007185E9 /* case~ipad.png */; };
 		77A8607916A0C704007185E9 /* case~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A8607516A0C704007185E9 /* case~ipad@2x.png */; };
 		77BF8C9B16924C0B0072069D /* NSString+PIOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BF8C9A16924C0B0072069D /* NSString+PIOExtensions.m */; };
+		77E3A53F171C98CF006323F9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77E3A53E171C98CF006323F9 /* AVFoundation.framework */; };
 		77E54AF31691292B000654D5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AEF1691292B000654D5 /* Icon.png */; };
 		77E54AF41691292B000654D5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF01691292B000654D5 /* Icon@2x.png */; };
 		77E54AF51691292B000654D5 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E54AF11691292B000654D5 /* Icon~ipad.png */; };
@@ -123,6 +124,7 @@
 		77A8607516A0C704007185E9 /* case~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case~ipad@2x.png"; sourceTree = "<group>"; };
 		77BF8C9916924C0B0072069D /* NSString+PIOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+PIOExtensions.h"; path = "Extensions/NSString+PIOExtensions.h"; sourceTree = "<group>"; };
 		77BF8C9A16924C0B0072069D /* NSString+PIOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+PIOExtensions.m"; path = "Extensions/NSString+PIOExtensions.m"; sourceTree = "<group>"; };
+		77E3A53E171C98CF006323F9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		77E54AEF1691292B000654D5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		77E54AF01691292B000654D5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		77E54AF11691292B000654D5 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77E3A53F171C98CF006323F9 /* AVFoundation.framework in Frameworks */,
 				77A80B4F166988C3003CD050 /* UIKit.framework in Frameworks */,
 				77A80B51166988C3003CD050 /* Foundation.framework in Frameworks */,
 				77A80B53166988C3003CD050 /* CoreGraphics.framework in Frameworks */,
@@ -227,6 +230,7 @@
 		77A80B3F166988C3003CD050 = {
 			isa = PBXGroup;
 			children = (
+				77E3A53E171C98CF006323F9 /* AVFoundation.framework */,
 				77A80B54166988C3003CD050 /* pull.io */,
 				77A80B72166988C3003CD050 /* pull.ioTests */,
 				77A80B4D166988C3003CD050 /* Frameworks */,

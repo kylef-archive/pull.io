@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "AFNetworkActivityIndicatorManager.h"
 #import "KFDataStore.h"
 #import "PIOAppDelegate.h"
@@ -56,6 +58,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [audioSession setActive:YES error:nil];
 
     KFDataStore *dataStore = [KFDataStore standardLocalDataStore];
     [self setDataStore:dataStore];
