@@ -45,10 +45,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    MPMoviePlayerController *moviePlayer = [self moviePlayer];
+    [moviePlayer setMovieSourceType:MPMovieSourceTypeStreaming];
+
     Video *video = [self video];
     if (video) {
-        MPMoviePlayerController *moviePlayer = [self moviePlayer];
-
         if ([self resumeFromPreviousPlayback]) {
             NSTimeInterval timestamp = [[video playback_time] doubleValue];
             [moviePlayer setInitialPlaybackTime:timestamp];
