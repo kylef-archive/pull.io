@@ -77,7 +77,8 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
-    NSManagedObjectContext *mainManagedObjectContext = [[self dataStore] managedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+    KFManagedObjectContext *mainManagedObjectContext = [[self dataStore] managedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+    [mainManagedObjectContext setMergeFromParentContext:YES];
     UIViewController *viewController = [[PIOMediaListViewController alloc] initWithManagedObjectContext:mainManagedObjectContext];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [[self window] setRootViewController:viewController];
