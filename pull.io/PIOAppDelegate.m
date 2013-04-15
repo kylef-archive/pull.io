@@ -59,8 +59,6 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     [audioSession setActive:YES error:nil];

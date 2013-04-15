@@ -65,6 +65,28 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+    if ([event subtype] == UIEventSubtypeRemoteControlTogglePlayPause) {
+        MPMoviePlayerController *moviePlayer = [self moviePlayer];
+
+        if ([moviePlayer playbackState] == MPMusicPlaybackStatePlaying) {
+            [moviePlayer pause];
+        } else {
+            [moviePlayer play];
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
