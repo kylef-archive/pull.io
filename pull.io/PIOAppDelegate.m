@@ -102,7 +102,7 @@
 
 #ifdef TESTFLIGHT
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-    [TestFlight takeOff:@"ee2e21b271602eefeb8207851c5c6838_MTYxNDg0MjAxMi0xMi0xNyAxNTo0Nzo1Mi41NDg1MDk"];
+    [TestFlight takeOff:@"fbfb900a-260a-4882-8bab-ed6b8ccb1bb6"];
 #endif
 
     return YES;
