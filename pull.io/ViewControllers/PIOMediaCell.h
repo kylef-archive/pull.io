@@ -13,4 +13,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *posterImageView;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
+@property (nonatomic, weak) IBOutlet UIView *banner;
+
 @end

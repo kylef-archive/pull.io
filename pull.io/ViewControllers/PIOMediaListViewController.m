@@ -21,8 +21,8 @@
 
 #define kPIOMediaCell @"PIOMediaCell"
 #define kPIOMediaCellPad @"PIOMediaCell~ipad"
-#define kPIOMediaCellSize CGSizeMake(116, 200)
-#define kPIOMediaCellPadSize CGSizeMake(187, 300)
+#define kPIOMediaCellSize CGSizeMake(121, 200)
+#define kPIOMediaCellPadSize CGSizeMake(193, 300)
 #define kPIOMediaListSectionInset UIEdgeInsetsMake(30, 30, 30, 30)
 #define kPIOMediaListSectionPadInset UIEdgeInsetsMake(30, 50, 30, 50)
 
@@ -154,8 +154,12 @@ typedef enum {
         name = [show name];
         NSURL *posterURL = [NSURL URLWithString:[show poster]];
         [[cell posterImageView] setImageWithURL:posterURL];
+
+        NSSet *episodes = [[show episodes] filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"watched == NO AND file.@count > 0"]];
+        [[cell banner] setHidden:([episodes count] ? NO : YES)];
     } else {
         name = [(File*)managedObject filename];
+        [[cell banner] setHidden:YES];
     }
 
     [[cell titleLabel] setText:name];
