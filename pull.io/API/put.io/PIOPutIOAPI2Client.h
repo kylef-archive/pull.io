@@ -26,7 +26,8 @@
 
 - (NSURL*)URLForFileID:(NSString*)fileID;
 
-- (void)getFiles;
+- (void)getFilesSuccess:(void (^)(void))success
+                failure:(void (^)(NSError *error))failure;
 - (void)deleteFile:(PutIOFile *)file;
 
 @end

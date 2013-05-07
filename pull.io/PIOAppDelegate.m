@@ -93,7 +93,7 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([[self putIOAPIClient] hasAuthorization]) {
-            [[self putIOAPIClient] getFiles];
+            [[self putIOAPIClient] getFilesSuccess:nil failure:nil];
         } else {
             NSURL *URL = [[self putIOAPIClient] authenticationURL];
             [[UIApplication sharedApplication] openURL:URL];

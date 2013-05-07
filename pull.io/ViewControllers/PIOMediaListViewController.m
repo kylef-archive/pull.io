@@ -28,6 +28,8 @@
 
 @interface PIOMediaListViewController ()
 
+@property (nonatomic, weak) UIRefreshControl *refreshControl;
+
 @end
 
 typedef enum {
@@ -71,11 +73,6 @@ typedef enum {
     [[self collectionView] registerNib:cellNib
             forCellWithReuseIdentifier:kPIOMediaCell];
 
-    UIBarButtonItem *reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                                  target:self
-                                                                                  action:@selector(reloadData)];
-    [[self navigationItem] setRightBarButtonItem:reloadButton];
-
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[
         NSLocalizedString(@"MEDIA_LIST_SHOWS_FILTER", nil),
         NSLocalizedString(@"MEDIA_LIST_FILES_FILTER", nil),
@@ -90,10 +87,24 @@ typedef enum {
 
     [segmentedControl setSelectedSegmentIndex:0];
     [self setListType:0];
+
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
+    [[self collectionView] addSubview:refreshControl];
+    [[self collectionView] setAlwaysBounceVertical:YES];
+    [self setRefreshControl:refreshControl];
 }
 
 - (void)reloadData {
-    [[PIOAppDelegate sharedPutIOAPIClient] getFiles];
+    [[PIOAppDelegate sharedPutIOAPIClient] getFilesSuccess:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self refreshControl] endRefreshing];
+        });
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self refreshControl] endRefreshing];
+        });
+    }];
 }
 
 - (void)changeListType:(UISegmentedControl*)segmentedControl {

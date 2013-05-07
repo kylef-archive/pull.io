@@ -77,7 +77,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
         success(credential);
 
 #pragma mark - Mis placed API call
-        [self getFiles];
+        [self getFilesSuccess:nil failure:nil];
 
 #if TESTFLIGHT
         [TestFlight passCheckpoint:@"Authenticated"];
@@ -108,7 +108,9 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
     return url;
 }
 
-- (void)getFiles {
+- (void)getFilesSuccess:(void (^)(void))success
+                failure:(void (^)(NSError *error))failure
+{
     NSDictionary *parameters = @{
         @"oauth_token": [self accessToken],
     };
@@ -150,9 +152,13 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
             NSPredicate *removalPredicate = [NSPredicate predicateWithFormat:@"NOT (id IN %@)", updatedFiles];
             [PutIOFile removeAllInManagedObjectContext:managedObjectContext
                                          withPredicate:removalPredicate];
-        }];
+        } success:success failure:failure];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Get files failed: %@", error);
+
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 
