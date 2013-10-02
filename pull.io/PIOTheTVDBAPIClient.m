@@ -155,7 +155,7 @@
                           DDXMLNode *imdbIDNode = [imdbIDElement childAtIndex:0];
                           NSString *imdbID = [imdbIDNode stringValue];
 
-                          [[show managedObjectContext] performWriteBlock:^{
+                          [[show managedObjectContext] performWriteBlock:^(NSManagedObjectContext *managedObjectContext) {
                               [show setName:seriesName];
                               [show setTvdb_id:seriesID];
                               [show setOverview:overview];
@@ -206,7 +206,7 @@
             DDXMLNode *nameNode = [nameElement childAtIndex:0];
             NSString *name = [nameNode stringValue];
 
-            [managedObjectContext performWriteBlock:^{
+            [managedObjectContext performWriteBlock:^(NSManagedObjectContext *managedObjectContext) {
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(season == %@ AND episode == %@) OR (aired != nil AND aired == %@)", seasonNumber, episodeNumber, firstAired];
                 NSSet *episodes = [[show episodes] filteredSetUsingPredicate:predicate];
 

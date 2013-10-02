@@ -101,7 +101,7 @@
 
     Video *video = [self video];
 
-    [[video managedObjectContext] performWriteBlock:^{
+    [[video managedObjectContext] performWriteBlock:^(NSManagedObjectContext *managedObjectContext) {
         [video setPlayback_time:[NSNumber numberWithDouble:currentPlaybackTime]];
 
         if (([[video watched] boolValue] == NO) &&

@@ -167,7 +167,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
 
-        [[self managedObjectContext] performWriteBlock:^{
+        [[self managedObjectContext] performWriteBlock:^ (NSManagedObjectContext *managedObjectContext) {
             NSSet *files = [[episode file] copy];
 
             for (File *file in files) {
@@ -175,7 +175,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                     [[PIOAppDelegate sharedPutIOAPIClient] deleteFile:(PutIOFile *)file];
                 }
 
-                [[self managedObjectContext] deleteObject:file];
+                [managedObjectContext deleteObject:file];
             }
 
             NSFetchRequest *fetchRequest = [[self fetchedResultsController] fetchRequest];

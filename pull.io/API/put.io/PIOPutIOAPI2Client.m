@@ -122,9 +122,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
     [self getPath:path parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-
-        [managedObjectContext performWriteBlock:^{
+        [[self managedObjectContext] performWriteBlock:^(NSManagedObjectContext *managedObjectContext) {
             NSArray *files = [responseObject objectForKey:@"files"];
             NSMutableSet *updatedFiles = [[NSMutableSet alloc] initWithCapacity:[files count]];
 
