@@ -66,15 +66,15 @@
     KFDataStore *dataStore = [KFDataStore standardLocalDataStore];
     [self setDataStore:dataStore];
 
-    NSManagedObjectContext *managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    NSManagedObjectContext *managedObjectContext = [dataStore backgroundManagedObjectContext];
     [self setPutIOAPIClient:[[PIOPutIOAPI2Client alloc] initWithManagedObjectContext:managedObjectContext]];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSManagedObjectContext *managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        NSManagedObjectContext *managedObjectContext = [dataStore backgroundManagedObjectContext];
         PIOFileManager *fileManager = [[PIOFileManager alloc] initWithManagedObjectContext:managedObjectContext];
         [self setFileManager:fileManager];
 
-        managedObjectContext = [dataStore managedObjectContextWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        managedObjectContext = [dataStore backgroundManagedObjectContext];
         PIOTheTVDBAPIClient *apiClient = [[PIOTheTVDBAPIClient alloc] initWithManagedObjectContext:managedObjectContext];
         [self setTvdbAPIClient:apiClient];
     });
@@ -83,8 +83,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
-    KFManagedObjectContext *mainManagedObjectContext = [[self dataStore] managedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
-    [mainManagedObjectContext setMergeFromParentContext:YES];
+    NSManagedObjectContext *mainManagedObjectContext = [[self dataStore] managedObjectContext];
     UIViewController *viewController = [[PIOMediaListViewController alloc] initWithManagedObjectContext:mainManagedObjectContext];
     viewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [[self window] setRootViewController:viewController];

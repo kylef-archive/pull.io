@@ -19,4 +19,10 @@
     return nil;
 }
 
++ (KFObjectManager *)managerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    return [[super managerWithManagedObjectContext:managedObjectContext] orderBy:@[
+        [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES],
+    ]];
+}
+
 @end

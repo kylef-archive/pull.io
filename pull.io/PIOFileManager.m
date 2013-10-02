@@ -30,13 +30,9 @@
         PIOShowFilenameMatcher *filenameMatcher = [[PIOShowFilenameMatcher alloc] init];
         [self setFilenameMatcher:filenameMatcher];
 
-        NSFetchRequest *fetchRequest = [File requestAllInManagedObjectContext:managedObjectContext];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video == nil"];
+        NSFetchRequest *fetchRequest = [[[File managerWithManagedObjectContext:managedObjectContext] filter:predicate] fetchRequest];
         [fetchRequest setPredicate:predicate];
-
-        [fetchRequest setSortDescriptors:@[
-             [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES],
-         ]];
 
         [fetchRequest setIncludesSubentities:YES];
 
@@ -122,7 +118,7 @@
             
             [file setVideo:episode];
             
-            [managedObjectContext nestedSave:nil];
+            [managedObjectContext save:nil];
         }
     }
 }

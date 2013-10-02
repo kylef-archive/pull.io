@@ -8,9 +8,6 @@
 
 #import "AFKissXMLRequestOperation.h"
 
-#import "NSManagedObject+KFData.h"
-#import "NSManagedObjectContext+KFData.h"
-
 #import "PIOTheTVDBAPIClient.h"
 
 #import "Show+PIOExtension.h"
@@ -39,15 +36,13 @@
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
     if (self = [self init]) {
-        NSFetchRequest *fetchRequest = [Show requestAllInManagedObjectContext:managedObjectContext];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tvdb_id == 0"];
-        [fetchRequest setPredicate:predicate];
+        KFObjectManager *manager = [[Show managerWithManagedObjectContext:managedObjectContext] filter:[NSPredicate predicateWithFormat:@"tvdb_id == 0"]];
 
-        [fetchRequest setSortDescriptors:@[
+        manager = [manager orderBy:@[
             [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
         ]];
 
-        NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+        NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[manager fetchRequest]
                                                                                                    managedObjectContext:managedObjectContext
                                                                                                      sectionNameKeyPath:nil
                                                                                                               cacheName:nil];
@@ -162,7 +157,7 @@
                               [show setPoster:posterURL];
 
                               [self updatedEpisodesForShow:show];
-                          }];
+                          } success:nil failure:nil];
                       }
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"TheTVDBAPI findShow inner failure: %@", error);
@@ -225,7 +220,7 @@
                     [episode setAired:firstAired];
                     [episode setShow:show];
                 }
-            }];
+            } success:nil failure:nil];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"TheTVDBAPI updatedEpisodesForShow failure: %@", error);

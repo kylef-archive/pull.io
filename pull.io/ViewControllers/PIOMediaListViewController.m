@@ -112,29 +112,24 @@ typedef enum {
 }
 
 - (void)setListType:(PIOMediaListTypes)listType {
-    NSFetchRequest *fetchRequest;
+    KFObjectManager *manager;
 
     switch (listType) {
         case PIOMediaListShowType: {
-            fetchRequest = [Show requestAllInManagedObjectContext:[self managedObjectContext]];
-            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"SUBQUERY(episodes, $episode, SUBQUERY($episode.file, $file, $file != nil).@count > 0).@count > 0"]];
-            [fetchRequest setSortDescriptors:@[
-                [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES],
-            ]];
+            manager = [[Show managerWithManagedObjectContext:[self managedObjectContext]] filter:[NSPredicate predicateWithFormat:@"SUBQUERY(episodes, $episode, SUBQUERY($episode.file, $file, $file != nil).@count > 0).@count > 0"]];
             break;
         }
 
         case PIOMediaListFileType: {
-            fetchRequest = [File requestAllInManagedObjectContext:[self managedObjectContext]];
-            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"video == nil"]];
-            [fetchRequest setSortDescriptors:@[
+            manager = [[File managerWithManagedObjectContext:[self managedObjectContext]] filter:[NSPredicate predicateWithFormat:@"video == nil"]];
+            manager = [manager orderBy:@[
                 [NSSortDescriptor sortDescriptorWithKey:@"filename" ascending:YES],
             ]];
             break;
         }
     }
-    
-    [self setFetchRequest:fetchRequest sectionNameKeyPath:nil];
+
+    [self setFetchRequest:[manager fetchRequest] sectionNameKeyPath:nil];
 }
 
 #pragma mark -

@@ -10,9 +10,16 @@
 
 @implementation Show (PIOExtension)
 
++ (KFObjectManager *)managerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    NSArray *sortDescriptors = @[
+        [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]
+    ];
+
+    return [[super managerWithManagedObjectContext:managedObjectContext] orderBy:sortDescriptors];
+}
+
 + (Show*)findOrCreate:(NSString*)showName inManagedObjectContext:(NSManagedObjectContext*)managedObjectContext {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", showName];
-    Show *show = [Show findSingleWithPredicate:predicate inManagedObjectContext:managedObjectContext];
+    Show *show = (Show *)[[[self managerWithManagedObjectContext:managedObjectContext] filter:[NSPredicate predicateWithFormat:@"name LIKE[c] %@", showName]] firstObject:nil];
 
     if (show == nil) {
         show = [Show createInManagedObjectContext:managedObjectContext];

@@ -6,9 +6,6 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
-#import "NSManagedObjectContext+KFData.h"
-#import "NSManagedObject+KFData.h"
-
 #import "AFJSONRequestOperation.h"
 #import "AFOAuth2Client.h"
 
@@ -134,7 +131,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
                     NSString *filename = [file objectForKey:@"name"];
 
                     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", idx];
-                    PutIOFile *managedFile = [PutIOFile findSingleWithPredicate:predicate inManagedObjectContext:managedObjectContext];
+                    PutIOFile *managedFile = (PutIOFile *)[[[PutIOFile managerWithManagedObjectContext:managedObjectContext] filter:predicate] firstObject:nil];
 
                     if (managedFile == nil) {
                         managedFile = [PutIOFile createInManagedObjectContext:managedObjectContext];
@@ -148,8 +145,7 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
             }
 
             NSPredicate *removalPredicate = [NSPredicate predicateWithFormat:@"NOT (id IN %@)", updatedFiles];
-            [PutIOFile removeAllInManagedObjectContext:managedObjectContext
-                                         withPredicate:removalPredicate];
+            [[[PutIOFile managerWithManagedObjectContext:managedObjectContext] filter:removalPredicate] deleteObjects:nil];
         } success:success failure:failure];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Get files failed: %@", error);

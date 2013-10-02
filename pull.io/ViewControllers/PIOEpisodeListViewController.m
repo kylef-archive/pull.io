@@ -72,19 +72,11 @@
         });
     }];
 
-    NSFetchRequest *fetchRequest = [Episode requestAllInManagedObjectContext:[self managedObjectContext]];
-
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND (file.@count > 0)", show];
-    [fetchRequest setPredicate:predicate];
-
-    [fetchRequest setSortDescriptors:@[
-        [NSSortDescriptor sortDescriptorWithKey:@"season" ascending:YES],
-        [NSSortDescriptor sortDescriptorWithKey:@"episode" ascending:YES],
-        [NSSortDescriptor sortDescriptorWithKey:@"aired" ascending:YES],
-    ]];
+    KFObjectManager *manager = [[Episode managerWithManagedObjectContext:[self managedObjectContext]] filter:predicate];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setFetchRequest:fetchRequest sectionNameKeyPath:@"season"];
+        [self setFetchRequest:[manager fetchRequest] sectionNameKeyPath:@"season"];
     });
 }
 
@@ -179,12 +171,15 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             }
 
             NSFetchRequest *fetchRequest = [[self fetchedResultsController] fetchRequest];
-            NSArray *episodes = [Episode executeFetchRequest:fetchRequest inManagedObjectContext:[self managedObjectContext]];
+            KFObjectManager *manager = [KFObjectManager managerWithManagedObjectContext:[self managedObjectContext] fetchRequest:fetchRequest];
 
-            if ([episodes count] == 0) {
+            NSError *error;
+            NSUInteger count = [manager count:&error];
+
+            if (error == nil && count == 0) {
                 [self close];
             }
-        }];
+        } success:nil failure:nil];
     }
 }
 

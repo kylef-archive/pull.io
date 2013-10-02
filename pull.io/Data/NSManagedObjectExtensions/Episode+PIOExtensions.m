@@ -11,6 +11,14 @@
 
 @implementation Episode (PIOExtensions)
 
++ (KFObjectManager *)managerWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    return [[super managerWithManagedObjectContext:managedObjectContext] orderBy:@[
+        [NSSortDescriptor sortDescriptorWithKey:@"season" ascending:YES],
+        [NSSortDescriptor sortDescriptorWithKey:@"episode" ascending:YES],
+        [NSSortDescriptor sortDescriptorWithKey:@"aired" ascending:YES],
+    ]];
+}
+
 + (Episode*)findOrShow:(Show*)show
                 Season:(NSNumber*)seasonNumber
                Episode:(NSNumber*)episodeNumber
@@ -21,12 +29,12 @@ inManagedObjectContext:(NSManagedObjectContext*)managedObjectContext
 
     if (seasonNumber && episodeNumber) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND episode == %@ AND season == %@", show, episodeNumber, seasonNumber];
-        episode = [Episode findSingleWithPredicate:predicate inManagedObjectContext:managedObjectContext];
+        episode = (Episode *)[[[Episode managerWithManagedObjectContext:managedObjectContext] filter:predicate] firstObject:nil];
     }
 
     if (episode == nil && aired) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND aired == %@", show, aired];
-        episode = [Episode findSingleWithPredicate:predicate inManagedObjectContext:managedObjectContext];
+        episode = (Episode *)[[[Episode managerWithManagedObjectContext:managedObjectContext] filter:predicate] firstObject:nil];
     }
 
     if (episode == nil) {

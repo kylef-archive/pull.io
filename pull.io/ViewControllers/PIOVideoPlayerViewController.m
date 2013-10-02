@@ -110,7 +110,7 @@
         {
             [video setWatched:@YES];
         }
-    }];
+    } success:nil failure:nil];
 }
 
 @end
