@@ -8,8 +8,12 @@
 
 #import <KFDataTableViewController.h>
 
+@class Show;
+
 @interface PIOEpisodeListViewController : KFDataTableViewController
 
-- (void)setShow:(NSManagedObjectID*)show;
+@property (nonatomic, strong, readonly) Show *show;
+
+- (instancetype)initWithShow:(Show *)show;
 
 @end

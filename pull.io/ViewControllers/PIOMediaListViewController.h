@@ -10,6 +10,8 @@
 
 @interface PIOMediaListViewController : KFDataCollectionViewController
 
+@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
+
 - (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end

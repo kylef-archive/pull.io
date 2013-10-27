@@ -18,6 +18,8 @@
 #import "Episode+PIOExtensions.h"
 #import "File.h"
 #import "PutIOFile.h"
+#import <KFData/KFDataTableViewDataSource.h>
+
 
 @interface PIOEpisodeListViewController () <UIActionSheetDelegate>
 
@@ -27,6 +29,14 @@
 
 @implementation PIOEpisodeListViewController
 
+- (instancetype)initWithShow:(Show *)show {
+    if (self = [super init]) {
+        _show = show;
+    }
+
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -34,64 +44,49 @@
                                                                                    target:self
                                                                                    action:@selector(close)];
     [[self navigationItem] setRightBarButtonItem:barButtonItem];
+
+    Show *show = [self show];
+    NSString *title = [show name];
+    NSString *overview = [show overview];
+
+    [self setTitle:title];
+
+    if ([overview length] > 0) {
+        UIFont *font = [UIFont systemFontOfSize:16];
+        CGSize size = [[self tableView] frame].size;
+        CGSize textSize = [overview sizeWithFont:font constrainedToSize:CGSizeMake(size.width - 20, MAXFLOAT)];
+        size.height = textSize.height + 20;
+
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, textSize.width, textSize.height)];
+        [descriptionLabel setFont:font];
+        [descriptionLabel setNumberOfLines:0];
+        [descriptionLabel setText:overview];
+        [headerView addSubview:descriptionLabel];
+
+        UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height - 1, size.width, 1)];
+        [borderView setBackgroundColor:[UIColor lightGrayColor]];
+        [headerView addSubview:borderView];
+
+        [[self tableView] setTableHeaderView:headerView];
+    }
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND (file.@count > 0)", show];
+    KFObjectManager *manager = [[Episode managerWithManagedObjectContext:[show managedObjectContext]] filter:predicate];
+    [self setObjectManager:manager sectionNameKeyPath:@"season" cacheName:nil];
 }
 
 - (void)close {
     [[self navigationController] dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)setShow:(NSManagedObjectID*)showID {
-    Show *show = (Show*)[[self managedObjectContext] objectWithID:showID];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForManagedObject:(Episode *)episode atIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
 
-    [[self managedObjectContext] performBlock:^{
-        NSString *title = [show name];
-        NSString *overview = [show overview];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setTitle:title];
-
-            if ([overview length] > 0) {
-                UIFont *font = [UIFont systemFontOfSize:16];
-                CGSize size = [[self tableView] frame].size;
-                CGSize textSize = [overview sizeWithFont:font constrainedToSize:CGSizeMake(size.width - 20, MAXFLOAT)];
-                size.height = textSize.height + 20;
-
-                UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-                UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, textSize.width, textSize.height)];
-                [descriptionLabel setFont:font];
-                [descriptionLabel setNumberOfLines:0];
-                [descriptionLabel setText:overview];
-                [headerView addSubview:descriptionLabel];
-
-                UIView *borderView = [[UIView alloc] initWithFrame:CGRectMake(0, size.height - 1, size.width, 1)];
-                [borderView setBackgroundColor:[UIColor lightGrayColor]];
-                [headerView addSubview:borderView];
-
-                [[self tableView] setTableHeaderView:headerView];
-            }
-        });
-    }];
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"show == %@ AND (file.@count > 0)", show];
-    KFObjectManager *manager = [[Episode managerWithManagedObjectContext:[self managedObjectContext]] filter:predicate];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setFetchRequest:[manager fetchRequest] sectionNameKeyPath:@"season"];
-    });
-}
-
-- (NSString*)tableView:(UITableView *)tableView
-    reuseIdentifierForManagedObject:(NSManagedObject *)managedObject
-           atIndexPath:(NSIndexPath *)indexPath
-{
-    return @"cell";
-}
-
-- (void)tableView:(UITableView*)tableView
-   configuredCell:(UITableViewCell *)cell
- forManagedObject:(Episode *)episode
-      atIndexPath:(NSIndexPath *)indexPath
-{
     NSString *title = [episode name];
 
     if (title) {
@@ -109,26 +104,23 @@
 
     BOOL isWatched = [[episode watched] boolValue];
     [cell setAccessoryType:(isWatched ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone)];
-}
 
-- (UITableViewCell*)tableView:(UITableView*)tableView
-       cellForReuseIdentifier:(NSString *)reuseIdentifier
-{
-    return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    return cell;
 }
 
 #pragma mark -
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSArray *sections = [[self fetchedResultsController] sections];
-    id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
-
-    NSString *title = [NSString stringWithFormat:@"Season %@", [sectionInfo name]];
-    return title;
-}
+#pragma message("TODO")
+//- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    NSArray *sections = [[self dataSource] ];
+//    id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+//
+//    NSString *title = [NSString stringWithFormat:@"Season %@", [sectionInfo name]];
+//    return title;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+    Episode *episode = (Episode*)[[self dataSource] objectAtIndexPath:indexPath];
 
     double playbackTime = [[episode playback_time] doubleValue];
 
@@ -157,9 +149,9 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        Episode *episode = (Episode*)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+        Episode *episode = (Episode*)[[self dataSource] objectAtIndexPath:indexPath];
 
-        [[self managedObjectContext] performWriteBlock:^ (NSManagedObjectContext *managedObjectContext) {
+        [[[self show] managedObjectContext] performWriteBlock:^ (NSManagedObjectContext *managedObjectContext) {
             NSSet *files = [[episode file] copy];
 
             for (File *file in files) {
@@ -170,8 +162,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                 [managedObjectContext deleteObject:file];
             }
 
-            NSFetchRequest *fetchRequest = [[self fetchedResultsController] fetchRequest];
-            KFObjectManager *manager = [KFObjectManager managerWithManagedObjectContext:[self managedObjectContext] fetchRequest:fetchRequest];
+            NSFetchRequest *fetchRequest = [[self dataSource] fetchRequest];
+            KFObjectManager *manager = [KFObjectManager managerWithManagedObjectContext:managedObjectContext fetchRequest:fetchRequest];
 
             NSError *error;
             NSUInteger count = [manager count:&error];

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Kyle Fuller. All rights reserved.
 //
 
+#import <KFData/KFDataCollectionViewDataSource.h>
 #import "UIImageView+AFNetworking.h"
 
 #import "PIOAppDelegate.h"
@@ -18,6 +19,7 @@
 #import "Show.h"
 #import "File.h"
 #import "PIOMediaCell.h"
+
 
 #define kPIOMediaCell @"PIOMediaCell"
 #define kPIOMediaCellPad @"PIOMediaCell~ipad"
@@ -50,8 +52,8 @@ typedef enum {
         [collectionViewLayout setSectionInset:kPIOMediaListSectionInset];
     }
 
-    if (self = [super initWithManagedObjectContext:managedObjectContext
-                              collectionViewLayout:collectionViewLayout]) {
+    if (self = [super initWithCollectionViewLayout:collectionViewLayout]) {
+        _managedObjectContext = managedObjectContext;
     }
 
     return self;
@@ -129,7 +131,7 @@ typedef enum {
         }
     }
 
-    [self setFetchRequest:[manager fetchRequest] sectionNameKeyPath:nil];
+    [self setObjectManager:manager sectionNameKeyPath:nil cacheName:nil];
 }
 
 #pragma mark -
@@ -140,7 +142,7 @@ typedef enum {
     PIOMediaCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kPIOMediaCell
                                                                            forIndexPath:indexPath];
 
-    NSManagedObject *managedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    NSManagedObject *managedObject = [[self dataSource] objectAtIndexPath:indexPath];
 
     NSString *name;
     if ([managedObject isKindOfClass:[Show class]]) {
@@ -164,13 +166,10 @@ typedef enum {
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *managedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    NSManagedObject *managedObject = [[self dataSource] objectAtIndexPath:indexPath];
 
     if ([managedObject isKindOfClass:[Show class]]) {
-        NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [managedObjectContext setParentContext:[self managedObjectContext]];
-        PIOEpisodeListViewController *episodesListViewController = [[PIOEpisodeListViewController alloc] initWithManagedObjectContext:managedObjectContext];
-        [episodesListViewController setShow:[managedObject objectID]];
+        PIOEpisodeListViewController *episodesListViewController = [[PIOEpisodeListViewController alloc] initWithShow:(Show *)managedObject];
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:episodesListViewController];
         [navigationController setModalPresentationStyle:UIModalPresentationFormSheet];
