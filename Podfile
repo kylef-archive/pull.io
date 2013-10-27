@@ -1,4 +1,4 @@
-platform :ios, '5.0'
+platform :ios, '7.0'
 
 pod 'AFNetworking', '~> 1.0'
 pod 'AFKissXMLRequestOperation'
