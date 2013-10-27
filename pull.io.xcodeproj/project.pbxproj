@@ -468,6 +468,11 @@
 				CLASSPREFIX = PIO;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Kyle Fuller";
+				TargetAttributes = {
+					77A80B49166988C3003CD050 = {
+						DevelopmentTeam = 4R4XY9R8JR;
+					};
+				};
 			};
 			buildConfigurationList = 77A80B44166988C3003CD050 /* Build configuration list for PBXProject "pull.io" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -699,6 +704,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A04DB9BE92E745B682DE0801 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "pull.io/pull.io-Prefix.pch";
 				INFOPLIST_FILE = "pull.io/pull.io-Info.plist";
@@ -712,6 +718,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A04DB9BE92E745B682DE0801 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "pull.io/pull.io-Prefix.pch";
 				INFOPLIST_FILE = "pull.io/pull.io-Info.plist";
@@ -787,6 +794,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A04DB9BE92E745B682DE0801 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "pull.io/pull.io-Prefix.pch";
 				INFOPLIST_FILE = "pull.io/pull.io-Info.plist";
