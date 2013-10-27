@@ -6,3 +6,9 @@ pod 'KFData'
 pod 'AFOAuth2Client'
 pod 'TestFlightSDK'
 
+target :tests do
+    link_with 'pull.ioTests'
+
+    pod 'Expecta'
+end
+

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A4C0C19F8CA49A9ABC329BB /* libPods-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08364447B4994601AFE63BD5 /* libPods-tests.a */; };
 		71A9872C9AE040CA8F744608 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32D63AAAE4BFC886211ED /* libPods.a */; };
 		77019D4316A246C600DC5B7C /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 77019D4216A246C600DC5B7C /* File.m */; };
 		77019D4616A248B000DC5B7C /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 77019D4516A248B000DC5B7C /* Video.m */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08364447B4994601AFE63BD5 /* libPods-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA32D63AAAE4BFC886211ED /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		77019D4116A246C600DC5B7C /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Data/NSManagedObject/File.h; sourceTree = "<group>"; };
 		77019D4216A246C600DC5B7C /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Data/NSManagedObject/File.m; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 		77E696AC16AB2E53009576BA /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Episode.m; path = Data/NSManagedObject/Episode.m; sourceTree = "<group>"; };
 		77FD3829166C1EAA00152690 /* PIOTraktAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOTraktAPIClient.h; path = API/trakt/PIOTraktAPIClient.h; sourceTree = "<group>"; };
 		77FD382A166C1EAA00152690 /* PIOTraktAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOTraktAPIClient.m; path = API/trakt/PIOTraktAPIClient.m; sourceTree = "<group>"; };
+		7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.xcconfig"; path = "Pods/Pods-tests.xcconfig"; sourceTree = "<group>"; };
 		A04DB9BE92E745B682DE0801 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -169,6 +172,7 @@
 				77A80B6D166988C3003CD050 /* SenTestingKit.framework in Frameworks */,
 				77A80B6E166988C3003CD050 /* UIKit.framework in Frameworks */,
 				77A80B6F166988C3003CD050 /* Foundation.framework in Frameworks */,
+				1A4C0C19F8CA49A9ABC329BB /* libPods-tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +244,7 @@
 				77A80B4D166988C3003CD050 /* Frameworks */,
 				77A80B4B166988C3003CD050 /* Products */,
 				A04DB9BE92E745B682DE0801 /* Pods.xcconfig */,
+				7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,6 +266,7 @@
 				77A80B52166988C3003CD050 /* CoreGraphics.framework */,
 				77A80B6C166988C3003CD050 /* SenTestingKit.framework */,
 				5BA32D63AAAE4BFC886211ED /* libPods.a */,
+				08364447B4994601AFE63BD5 /* libPods-tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -444,10 +450,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77A80B80166988C3003CD050 /* Build configuration list for PBXNativeTarget "pull.ioTests" */;
 			buildPhases = (
+				7526FABFC4AD45ED942AA174 /* Check Pods Manifest.lock */,
 				77A80B66166988C3003CD050 /* Sources */,
 				77A80B67166988C3003CD050 /* Frameworks */,
 				77A80B68166988C3003CD050 /* Resources */,
 				77A80B69166988C3003CD050 /* ShellScript */,
+				9B54CA20931E4E29868DCD48 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -528,6 +536,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7526FABFC4AD45ED942AA174 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		7703CDC6167E04040089EA1B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -553,6 +576,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		9B54CA20931E4E29868DCD48 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		EC0E85A0A46444D7921C80FF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -730,6 +768,7 @@
 		};
 		77A80B81166988C3003CD050 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/pull.io.app/pull.io";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -747,6 +786,7 @@
 		};
 		77A80B82166988C3003CD050 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/pull.io.app/pull.io";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -806,6 +846,7 @@
 		};
 		77EC1C5B167E186300E016E4 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/pull.io.app/pull.io";
 				FRAMEWORK_SEARCH_PATHS = (
