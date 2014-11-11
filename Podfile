@@ -2,7 +2,7 @@ platform :ios, '7.0'
 
 pod 'AFNetworking', '~> 1.0'
 pod 'AFKissXMLRequestOperation'
-pod 'KFData'
+pod 'KFData', '1.0.0-RC1'
 pod 'AFOAuth2Client'
 pod 'TestFlightSDK'
 

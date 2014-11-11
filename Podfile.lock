@@ -1,13 +1,13 @@
 PODS:
   - AFKissXMLRequestOperation (0.0.1):
-    - AFNetworking
+    - AFNetworking (~> 1.3)
     - KissXML (~> 5.0)
-  - AFNetworking (1.3.3)
-  - AFOAuth2Client (0.1.1):
-    - AFNetworking (~> 1.0)
-  - Expecta (0.2.3)
+  - AFNetworking (1.3.4)
+  - AFOAuth2Client (0.1.2):
+    - AFNetworking (~> 1.3)
+  - Expecta (0.3.1)
   - KFData (1.0.0-RC1):
-    - KFData/Essentials
+    - KFData/Essentials (= 1.0.0-RC1)
   - KFData/Core (1.0.0-RC1)
   - KFData/Essentials (1.0.0-RC1):
     - KFData/Core
@@ -15,25 +15,26 @@ PODS:
     - KFData/UI
   - KFData/Store (1.0.0-RC1)
   - KFData/UI (1.0.0-RC1):
-    - KFData/Essentials
+    - KFData/Core
+    - KFData/Store
   - KissXML (5.0)
-  - TestFlightSDK (2.0)
+  - TestFlightSDK (3.0.2)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
   - AFNetworking (~> 1.0)
   - AFOAuth2Client
   - Expecta
-  - KFData
+  - KFData (= 1.0.0-RC1)
   - TestFlightSDK
 
 SPEC CHECKSUMS:
-  AFKissXMLRequestOperation: c5010fd22d4f03371d9960fd09792f7bc3b32f45
-  AFNetworking: 0700ec7a58c36ad217173e167f6e4df7270df66b
-  AFOAuth2Client: 039596f19e8a4bdd852cb3fc44ddbe45e12c290a
-  Expecta: dbc4a27fabb853bdd2e907e33f11ee43a9a47d0c
-  KFData: 1036e86bbbf3552cf3ef157a0d2750ca45ae0b38
-  KissXML: 4c66b6f39ef49c23e6bb8d335b94136f12b1b615
-  TestFlightSDK: 940906d4b2550cf397c6f2d2fcc4ebfdcd8ae858
+  AFKissXMLRequestOperation: 8994767c48c066c5cac35643bd1d0d980ffb1994
+  AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
+  AFOAuth2Client: 4f05d29e0a26c7ddf529dd7c4480af6ee1e982c6
+  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
+  KFData: 76fe46015b44b8e61c8f474d1cac0cfa793092fa
+  KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
+  TestFlightSDK: 0c24c533748d0d84bfe7a3cb6036fa79124d84ee
 
-COCOAPODS: 0.27.1
+COCOAPODS: 0.35.0.rc2

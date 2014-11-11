@@ -73,6 +73,10 @@
 
 /* Begin PBXFileReference section */
 		08364447B4994601AFE63BD5 /* libPods-tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2BBB632F7A9EEDD9B1F5C0 /* Pods-tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tests/Pods-tests.debug.xcconfig"; sourceTree = "<group>"; };
+		2D3EF65B1E9C1072E553A258 /* Pods-tests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-tests/Pods-tests.adhoc.xcconfig"; sourceTree = "<group>"; };
+		31F4C498BE35016A38E00405 /* Pods-tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tests/Pods-tests.release.xcconfig"; sourceTree = "<group>"; };
+		4383F812E8ACD7F035A6584E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5BA32D63AAAE4BFC886211ED /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		77019D4116A246C600DC5B7C /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = File.h; path = Data/NSManagedObject/File.h; sourceTree = "<group>"; };
 		77019D4216A246C600DC5B7C /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = File.m; path = Data/NSManagedObject/File.m; sourceTree = "<group>"; };
@@ -147,8 +151,8 @@
 		77E696AC16AB2E53009576BA /* Episode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Episode.m; path = Data/NSManagedObject/Episode.m; sourceTree = "<group>"; };
 		77FD3829166C1EAA00152690 /* PIOTraktAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIOTraktAPIClient.h; path = API/trakt/PIOTraktAPIClient.h; sourceTree = "<group>"; };
 		77FD382A166C1EAA00152690 /* PIOTraktAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIOTraktAPIClient.m; path = API/trakt/PIOTraktAPIClient.m; sourceTree = "<group>"; };
-		7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.xcconfig"; path = "Pods/Pods-tests.xcconfig"; sourceTree = "<group>"; };
-		A04DB9BE92E745B682DE0801 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		AFEDF7B0E6457FBFA851AA58 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D8169E7529BB8B6872CC3A5C /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,8 +247,7 @@
 				77A80B72166988C3003CD050 /* pull.ioTests */,
 				77A80B4D166988C3003CD050 /* Frameworks */,
 				77A80B4B166988C3003CD050 /* Products */,
-				A04DB9BE92E745B682DE0801 /* Pods.xcconfig */,
-				7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */,
+				8A53241D6BF9A36B17C71CEA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -424,6 +427,19 @@
 			name = Trakt;
 			sourceTree = "<group>";
 		};
+		8A53241D6BF9A36B17C71CEA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AFEDF7B0E6457FBFA851AA58 /* Pods.debug.xcconfig */,
+				4383F812E8ACD7F035A6584E /* Pods.release.xcconfig */,
+				D8169E7529BB8B6872CC3A5C /* Pods.adhoc.xcconfig */,
+				0D2BBB632F7A9EEDD9B1F5C0 /* Pods-tests.debug.xcconfig */,
+				31F4C498BE35016A38E00405 /* Pods-tests.release.xcconfig */,
+				2D3EF65B1E9C1072E553A258 /* Pods-tests.adhoc.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -465,7 +481,7 @@
 			name = pull.ioTests;
 			productName = pull.ioTests;
 			productReference = 77A80B6B166988C3003CD050 /* pull.ioTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -589,7 +605,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tests/Pods-tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EC0E85A0A46444D7921C80FF /* Copy Pods Resources */ = {
@@ -604,7 +620,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -740,7 +756,7 @@
 		};
 		77A80B7E166988C3003CD050 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A04DB9BE92E745B682DE0801 /* Pods.xcconfig */;
+			baseConfigurationReference = AFEDF7B0E6457FBFA851AA58 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -754,7 +770,7 @@
 		};
 		77A80B7F166988C3003CD050 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A04DB9BE92E745B682DE0801 /* Pods.xcconfig */;
+			baseConfigurationReference = 4383F812E8ACD7F035A6584E /* Pods.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -768,7 +784,7 @@
 		};
 		77A80B81166988C3003CD050 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 0D2BBB632F7A9EEDD9B1F5C0 /* Pods-tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/pull.io.app/pull.io";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -786,7 +802,7 @@
 		};
 		77A80B82166988C3003CD050 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 31F4C498BE35016A38E00405 /* Pods-tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/pull.io.app/pull.io";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -832,7 +848,7 @@
 		};
 		77EC1C5A167E186300E016E4 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A04DB9BE92E745B682DE0801 /* Pods.xcconfig */;
+			baseConfigurationReference = D8169E7529BB8B6872CC3A5C /* Pods.adhoc.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -846,7 +862,7 @@
 		};
 		77EC1C5B167E186300E016E4 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A7862DE262F4E69B997C626 /* Pods-tests.xcconfig */;
+			baseConfigurationReference = 2D3EF65B1E9C1072E553A258 /* Pods-tests.adhoc.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/pull.io.app/pull.io";
 				FRAMEWORK_SEARCH_PATHS = (
