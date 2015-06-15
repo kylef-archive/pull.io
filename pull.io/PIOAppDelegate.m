@@ -17,10 +17,6 @@
 
 #import "PIOMediaListViewController.h"
 
-#ifdef TESTFLIGHT
-#import "TestFlight.h"
-#endif
-
 #import "PIOFileManager.h"
 
 @interface PIOAppDelegate ()
@@ -98,11 +94,6 @@
             [[UIApplication sharedApplication] openURL:URL];
         }
     });
-
-#ifdef TESTFLIGHT
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-    [TestFlight takeOff:@"fbfb900a-260a-4882-8bab-ed6b8ccb1bb6"];
-#endif
 
     return YES;
 }

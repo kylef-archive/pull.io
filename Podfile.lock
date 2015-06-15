@@ -18,7 +18,6 @@ PODS:
     - KFData/Core
     - KFData/Store
   - KissXML (5.0)
-  - TestFlightSDK (3.0.2)
 
 DEPENDENCIES:
   - AFKissXMLRequestOperation
@@ -26,15 +25,13 @@ DEPENDENCIES:
   - AFOAuth2Client
   - Expecta
   - KFData (= 1.0.0-RC1)
-  - TestFlightSDK
 
 SPEC CHECKSUMS:
-  AFKissXMLRequestOperation: 8994767c48c066c5cac35643bd1d0d980ffb1994
-  AFNetworking: 80c4e0652b08eb34e25b9c0ff3c82556fe5967b4
-  AFOAuth2Client: 4f05d29e0a26c7ddf529dd7c4480af6ee1e982c6
-  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
+  AFKissXMLRequestOperation: 8000459be2c0f1237607103d4d14f9466efe9d8c
+  AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
+  AFOAuth2Client: ca9490461c522b6c4be37a26a3366c8d91856519
+  Expecta: a354d4633409dd9fe8c4f5ff5130426adbe31628
   KFData: 76fe46015b44b8e61c8f474d1cac0cfa793092fa
-  KissXML: e537c38b18ede903ee6de45953a9bd86c131ebe9
-  TestFlightSDK: 0c24c533748d0d84bfe7a3cb6036fa79124d84ee
+  KissXML: ce643413d618ad69886d0d43c3792b7dedfe476e
 
-COCOAPODS: 0.35.0.rc2
+COCOAPODS: 0.37.2

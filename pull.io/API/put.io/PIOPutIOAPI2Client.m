@@ -14,10 +14,6 @@
 #import "Show+PIOExtension.h"
 #import "Episode+PIOExtensions.h"
 
-#ifdef TESTFLIGHT
-#import "TestFlight.h"
-#endif
-
 static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/";
 
 #define kPIOPutUIAPIOAuthIdentifier @"com.kylefuller.pullio.putio"
@@ -76,15 +72,8 @@ static NSString * const kPIOPutIOAPI2APIBaseURLString = @"https://api.put.io/v2/
 #pragma mark - Mis placed API call
         [self getFilesSuccess:nil failure:nil];
 
-#if TESTFLIGHT
-        [TestFlight passCheckpoint:@"Authenticated"];
-#endif
     } failure:^(NSError *error) {
         failure(error);
-        
-#if TESTFLIGHT
-        TFLog(@"Authentication error: %@", error);
-#endif
     }];
 }
 
